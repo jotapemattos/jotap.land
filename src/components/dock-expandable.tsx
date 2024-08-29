@@ -15,6 +15,7 @@ type NavItems = {
   label: string
   title: JSX.Element
   content?: JSX.Element
+  href?: string
 }
 
 const transition = {
@@ -23,7 +24,24 @@ const transition = {
   duration: 0.25
 }
 
-const CONTACT_TABS = ['Twitter', 'LinkedIn', 'Github', 'Email']
+const CONTACT_TABS = [
+  {
+    label: 'Twitter',
+    href: 'https://x.com/devjotape'
+  },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/jo%C3%A3o-pedro-mattos-rodrigues-camargo/'
+  },
+  {
+    label: 'GitHub',
+    href: 'https://github.com/jotapemattos'
+  },
+  {
+    label: 'Email',
+    href: 'mailto:jotapemattos.dev@gmail.com'
+  }
+]
 const CRAFT_TABS = ['Crafts', 'Study Cases', 'Side Projects']
 
 const ITEMS: NavItems[] = [
@@ -31,17 +49,18 @@ const ITEMS: NavItems[] = [
     id: 1,
     label: 'Home',
     title: (
-      <span className="flex items-center gap-2">
+      <span className="flex items-center gap-2 text-contrast-50">
         <HomeIcon className="size-6" />
         Home
       </span>
-    )
+    ),
+    href: '/'
   },
   {
     id: 2,
     label: 'Messages',
     title: (
-      <span className="flex items-center gap-2">
+      <span className="flex items-center gap-2 text-contrast-50">
         <BeakerIcon className="size-6" />
         Crafts
       </span>
@@ -49,8 +68,7 @@ const ITEMS: NavItems[] = [
     content: (
       <div className="flex flex-col">
         <AnimatedBackground
-          defaultValue={CRAFT_TABS[0]}
-          className="rounded-lg bg-contrast-50 px-2"
+          className="rounded-lg bg-stone-600 px-2"
           transition={{
             type: 'spring',
             bounce: 0.2,
@@ -62,7 +80,7 @@ const ITEMS: NavItems[] = [
               key={index}
               data-id={tab}
               type="button"
-              className="p-2 text-contrast-100 transition-colors duration-300 hover:text-contrast-950">
+              className="p-2 text-contrast-50 transition-colors duration-300">
               {tab}
             </button>
           ))}
@@ -74,16 +92,15 @@ const ITEMS: NavItems[] = [
     id: 3,
     label: 'Documents',
     title: (
-      <span className="flex items-center gap-2">
+      <span className="flex items-center gap-2 text-contrast-50">
         <PaperAirplaneIcon className="size-6" />
         Contact
       </span>
     ),
     content: (
-      <div className="flex flex-col">
+      <div className="flex w-full flex-col">
         <AnimatedBackground
-          defaultValue={CONTACT_TABS[0]}
-          className="rounded-lg bg-stone-500 px-2"
+          className="rounded-lg bg-stone-600 px-2"
           transition={{
             type: 'spring',
             bounce: 0.2,
@@ -91,13 +108,14 @@ const ITEMS: NavItems[] = [
           }}
           enableHover>
           {CONTACT_TABS.map((tab, index) => (
-            <button
+            <a
               key={index}
-              data-id={tab}
-              type="button"
-              className="p-2 text-zinc-600 transition-colors duration-300 hover:text-zinc-950">
-              {tab}
-            </button>
+              data-id={tab.label}
+              href={tab.href}
+              target="_blank"
+              className="w-full p-2 text-contrast-50 transition-colors duration-300">
+              {tab.label}
+            </a>
           ))}
         </AnimatedBackground>
       </div>
@@ -112,6 +130,7 @@ export default function DockExpandable() {
   const ref = useRef<HTMLDivElement>(null)
   const [isOpen, setIsOpen] = useState(false)
   const [maxWidth, setMaxWidth] = useState(0)
+  const [isLink, setIsLink] = useState(true)
 
   useClickOutside(ref, () => {
     setIsOpen(false)
@@ -130,7 +149,7 @@ export default function DockExpandable() {
         <div className="h-full w-full rounded-2xl border border-zinc-950/10 bg-stone-800">
           <div className="overflow-hidden">
             <AnimatePresence initial={false} mode="sync">
-              {isOpen ? (
+              {isOpen && !isLink ? (
                 <motion.div
                   key="content"
                   initial={{ height: 0 }}
@@ -165,28 +184,55 @@ export default function DockExpandable() {
             </AnimatePresence>
           </div>
           <div className="flex space-x-2 p-2" ref={menuRef}>
-            {ITEMS.map((item) => (
-              <button
-                key={item.id}
-                aria-label={item.label}
-                className={cn(
-                  'relative flex size-fit shrink-0 scale-100 select-none appearance-none items-center justify-center rounded-lg p-2 text-zinc-500 transition-colors hover:bg-stone-950 hover:text-zinc-100 focus-visible:ring-2 active:scale-[0.98]',
-                  active === item.id ? 'bg-stone-950 text-stone-300' : ''
-                )}
-                type="button"
-                onClick={() => {
-                  if (!isOpen) setIsOpen(true)
-                  if (active === item.id) {
-                    setIsOpen(false)
-                    setActive(null)
-                    return
-                  }
+            {ITEMS.map((item) =>
+              item.content ? (
+                <button
+                  key={item.id}
+                  aria-label={item.label}
+                  className={cn(
+                    'relative flex size-fit shrink-0 scale-100 select-none appearance-none items-center justify-center rounded-lg p-2 text-sm text-zinc-500 transition-colors hover:bg-stone-950 hover:text-zinc-100 focus-visible:ring-2 active:scale-[0.98]',
+                    active === item.id ? 'bg-stone-950 text-stone-300' : ''
+                  )}
+                  type="button"
+                  onClick={() => {
+                    setIsLink(false)
+                    if (!isOpen) setIsOpen(true)
+                    if (active === item.id) {
+                      setIsOpen(false)
+                      setActive(null)
+                      return
+                    }
 
-                  setActive(item.id)
-                }}>
-                {item.title}
-              </button>
-            ))}
+                    setActive(item.id)
+                  }}>
+                  {item.title}
+                </button>
+              ) : (
+                <a
+                  href={item.href}
+                  key={item.id}
+                  aria-label={item.label}
+                  className={cn(
+                    'relative flex size-fit shrink-0 scale-100 select-none appearance-none items-center justify-center rounded-lg p-2 text-sm text-zinc-500 transition-colors hover:bg-stone-950 hover:text-zinc-100 focus-visible:ring-2 active:scale-[0.98]',
+                    active === item.id ? 'bg-stone-950 text-stone-300' : ''
+                  )}
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setIsLink(true)
+                    if (!isOpen) setIsOpen(true)
+                    if (active === item.id) {
+                      setIsOpen(false)
+                      setActive(null)
+                      return
+                    }
+
+                    setActive(item.id)
+                  }}>
+                  {item.title}
+                </a>
+              )
+            )}
           </div>
         </div>
       </div>
