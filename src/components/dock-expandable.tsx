@@ -1,14 +1,21 @@
 import {
-  ChatBubbleOvalLeftIcon,
-  FolderIcon,
-  UserIcon,
-  WalletIcon
+  BeakerIcon,
+  HomeIcon,
+  PaperAirplaneIcon
 } from '@heroicons/react/24/outline'
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import useMeasure from 'react-use-measure'
 import useClickOutside from '../hooks/use-click-outside'
 import { cn } from '../lib/utils'
+import AnimatedBackground from './ui/animated-background'
+
+type NavItems = {
+  id: number
+  label: string
+  title: JSX.Element
+  content?: JSX.Element
+}
 
 const transition = {
   type: 'spring',
@@ -16,76 +23,83 @@ const transition = {
   duration: 0.25
 }
 
-const ITEMS = [
+const CONTACT_TABS = ['Twitter', 'LinkedIn', 'Github', 'Email']
+const CRAFT_TABS = ['Crafts', 'Study Cases', 'Side Projects']
+
+const ITEMS: NavItems[] = [
   {
     id: 1,
-    label: 'User',
-    title: <UserIcon className="h-5 w-5" />,
-    content: (
-      <div className="flex flex-col space-y-4">
-        <div className="flex flex-col space-y-1 text-zinc-700">
-          <div className="h-8 w-8 rounded-full bg-gradient-to-br from-blue-500 to-blue-400" />
-          <span>Ibelick</span>
-        </div>
-        <button
-          className="relative h-8 w-full scale-100 select-none appearance-none items-center justify-center rounded-lg border border-zinc-950/10 px-2 text-sm text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-800 focus-visible:ring-2 active:scale-[0.98]"
-          type="button">
-          Edit Profile
-        </button>
-      </div>
+    label: 'Home',
+    title: (
+      <span className="flex items-center gap-2">
+        <HomeIcon className="size-6" />
+        Home
+      </span>
     )
   },
   {
     id: 2,
     label: 'Messages',
-    title: <ChatBubbleOvalLeftIcon className="h-5 w-5" />,
+    title: (
+      <span className="flex items-center gap-2">
+        <BeakerIcon className="size-6" />
+        Crafts
+      </span>
+    ),
     content: (
-      <div className="flex flex-col space-y-4">
-        <div className="text-zinc-700">You have 3 new messages.</div>
-        <button
-          className="relative h-8 w-full scale-100 select-none appearance-none items-center justify-center rounded-lg border border-zinc-950/10 px-2 text-sm text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-800 focus-visible:ring-2 active:scale-[0.98]"
-          type="button">
-          View more
-        </button>
+      <div className="flex flex-col">
+        <AnimatedBackground
+          defaultValue={CRAFT_TABS[0]}
+          className="rounded-lg bg-contrast-50 px-2"
+          transition={{
+            type: 'spring',
+            bounce: 0.2,
+            duration: 0.3
+          }}
+          enableHover>
+          {CRAFT_TABS.map((tab, index) => (
+            <button
+              key={index}
+              data-id={tab}
+              type="button"
+              className="p-2 text-contrast-100 transition-colors duration-300 hover:text-contrast-950">
+              {tab}
+            </button>
+          ))}
+        </AnimatedBackground>
       </div>
     )
   },
   {
     id: 3,
     label: 'Documents',
-    title: <FolderIcon className="h-5 w-5" />,
+    title: (
+      <span className="flex items-center gap-2">
+        <PaperAirplaneIcon className="size-6" />
+        Contact
+      </span>
+    ),
     content: (
-      <div className="flex flex-col space-y-4">
-        <div className="flex flex-col text-zinc-700">
-          <div className="space-y-1">
-            <div>Project_Proposal.pdf</div>
-            <div>Meeting_Notes.docx</div>
-            <div>Financial_Report.xls</div>
-          </div>
-        </div>
-        <button
-          className="relative h-8 w-full scale-100 select-none appearance-none items-center justify-center rounded-lg border border-zinc-950/10 px-2 text-sm text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-800 focus-visible:ring-2 active:scale-[0.98]"
-          type="button">
-          Manage documents
-        </button>
-      </div>
-    )
-  },
-  {
-    id: 4,
-    label: 'Wallet',
-    title: <WalletIcon className="h-5 w-5" />,
-    content: (
-      <div className="flex flex-col space-y-4">
-        <div className="flex flex-col text-zinc-700">
-          <span>Current Balance</span>
-          <span>$1,250.32</span>
-        </div>
-        <button
-          className="relative h-8 w-full scale-100 select-none appearance-none items-center justify-center rounded-lg border border-zinc-950/10 px-2 text-sm text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-800 focus-visible:ring-2 active:scale-[0.98]"
-          type="button">
-          View Transactions
-        </button>
+      <div className="flex flex-col">
+        <AnimatedBackground
+          defaultValue={CONTACT_TABS[0]}
+          className="rounded-lg bg-stone-500 px-2"
+          transition={{
+            type: 'spring',
+            bounce: 0.2,
+            duration: 0.3
+          }}
+          enableHover>
+          {CONTACT_TABS.map((tab, index) => (
+            <button
+              key={index}
+              data-id={tab}
+              type="button"
+              className="p-2 text-zinc-600 transition-colors duration-300 hover:text-zinc-950">
+              {tab}
+            </button>
+          ))}
+        </AnimatedBackground>
       </div>
     )
   }
@@ -113,7 +127,7 @@ export default function DockExpandable() {
   return (
     <MotionConfig transition={transition}>
       <div className="absolute bottom-8" ref={ref}>
-        <div className="h-full w-full rounded-xl border border-zinc-950/10 bg-white">
+        <div className="h-full w-full rounded-2xl border border-zinc-950/10 bg-stone-800">
           <div className="overflow-hidden">
             <AnimatePresence initial={false} mode="sync">
               {isOpen ? (
@@ -125,7 +139,7 @@ export default function DockExpandable() {
                   style={{
                     width: maxWidth
                   }}>
-                  <div ref={contentRef} className="p-2">
+                  <div ref={contentRef} className="p-1">
                     {ITEMS.map((item) => {
                       const isSelected = active === item.id
 
@@ -156,8 +170,8 @@ export default function DockExpandable() {
                 key={item.id}
                 aria-label={item.label}
                 className={cn(
-                  'relative flex h-9 w-9 shrink-0 scale-100 select-none appearance-none items-center justify-center rounded-lg text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-800 focus-visible:ring-2 active:scale-[0.98]',
-                  active === item.id ? 'bg-zinc-100 text-zinc-800' : ''
+                  'relative flex size-fit shrink-0 scale-100 select-none appearance-none items-center justify-center rounded-lg p-2 text-zinc-500 transition-colors hover:bg-stone-950 hover:text-zinc-100 focus-visible:ring-2 active:scale-[0.98]',
+                  active === item.id ? 'bg-stone-950 text-stone-300' : ''
                 )}
                 type="button"
                 onClick={() => {
