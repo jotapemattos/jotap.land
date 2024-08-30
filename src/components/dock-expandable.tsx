@@ -58,11 +58,11 @@ const ITEMS: NavItems[] = [
   },
   {
     id: 2,
-    label: 'Messages',
+    label: 'Lab',
     title: (
       <span className="flex items-center gap-2 text-contrast-50">
         <BeakerIcon className="size-6" />
-        Crafts
+        Lab
       </span>
     ),
     content: (
@@ -90,7 +90,7 @@ const ITEMS: NavItems[] = [
   },
   {
     id: 3,
-    label: 'Documents',
+    label: 'Contact',
     title: (
       <span className="flex items-center gap-2 text-contrast-50">
         <PaperAirplaneIcon className="size-6" />
