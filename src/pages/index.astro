@@ -1,11 +1,82 @@
 ---
+import Image from 'astro/components/Image.astro'
+import { AnimatedLink } from '../components/animated-link'
 import Layout from '../layouts/Layout.astro'
+
+const SOCIALS = [
+  {
+    label: 'Twitter',
+    href: 'https://x.com/devjotape'
+  },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/jo%C3%A3o-pedro-mattos-rodrigues-camargo/'
+  },
+  {
+    label: 'GitHub',
+    href: 'https://github.com/jotapemattos'
+  },
+  {
+    label: 'Email',
+    href: 'mailto:jotapemattos.dev@gmail.com'
+  }
+]
 ---
 
-<Layout title="Joao Pedro Mattos">
-  <main class="mx-auto mt-10 flex w-full max-w-screen-lg flex-col items-start">
-    <h1 class="font-serif text-9xl text-contrast-100">
-      Jotape, software engineer from Brasil
-    </h1>
+<Layout title="João Pedro — Home">
+  <main
+    class="mx-auto mb-32 mt-10 flex w-full max-w-screen-sm flex-col items-start gap-20">
+    <section
+      class="flex flex-wrap items-center justify-start gap-x-8 font-serif text-3xl leading-tight text-stone-300 [&>div>em>a]:text-contrast-100 [&>div>h1>em]:text-contrast-100 [&>p>em]:text-contrast-100">
+      <div class="flex flex-col items-start gap-y-10">
+        <Image src="/stone-300-logo.png" alt="Logo" width="40" height="40" />
+        <h1>Yo, I'm <em>João Pedro</em></h1>
+      </div>
+      <div class="flex items-center gap-x-4">
+        <span>a software engineer at</span>
+        <em>
+          <AnimatedLink
+            href="https://www.intranetmall.com.br/br/"
+            text="IntranetMall"
+          />
+        </em>
+      </div>
+      <p>based in <em>Bragança Paulista</em>, SP, Brazil</p>
+    </section>
+    <section
+      class="flex flex-col gap-y-8 font-sans text-stone-500 [&>h1]:text-xl [&>h1]:font-medium [&>h1]:text-stone-300 [&>p]:font-light">
+      <h1>About</h1>
+      <div
+        class="space-y-4 [&>p>a]:decoration-slice [&>p>a]:text-stone-300 [&>p>a]:underline [&>p>a]:decoration-stone-300 [&>p>em]:text-stone-300">
+        <p>
+          I work as a <em>Software Engineer</em> at IntranetMall, straddling the
+          intersection of <em>pixels and code</em>. My passion lies in the sweet
+          spot where <em>form meets function</em>, turning complex ideas into
+          <em>polished digital experiences</em>. Beyond work, what truly
+          inspires my craft is savoring great food, <a
+            href="https://letterboxd.com/jotapzn/"
+            target="_blank">diving into movies</a
+          >, and <a
+            href="https://open.spotify.com/user/yw78qs7x7uerkgmw6ngpsd75n"
+            target="_blank">listening to good music</a
+          >.
+        </p>
+        <p>
+          As a <em>creative kid</em> with an insatiable curiosity, I was always drawing,
+          building, and seeking to understand the world around me. It didn't take
+          long for me to realize that I would love to <em
+            >create for the web.</em
+          >
+        </p>
+        <p>
+          If this combination interests you, I extend a warm invitation to my
+          <em>humble abode on the internet</em>. Here, I'll share my musings
+          about the path to becoming a great <em>design engineer</em>, recount
+          my <em>software adventures</em>, and perhaps drop some random thoughts
+          along the way.
+        </p>
+      </div>
+    </section>
+    <section class="mx-auto flex w-full items-center justify-center"></section>
   </main>
 </Layout>
