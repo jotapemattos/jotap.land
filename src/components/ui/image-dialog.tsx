@@ -9,18 +9,11 @@ import {
 } from './compound-dialog'
 
 interface DialogBasicImageProps {
-  triggerImage: string
   contentImage: string
   alt: string
-  className: string
 }
 
-export function DialogBasicImage({
-  triggerImage,
-  contentImage,
-  alt,
-  className
-}: DialogBasicImageProps) {
+export function DialogBasicImage({ contentImage, alt }: DialogBasicImageProps) {
   return (
     <Dialog
       transition={{
@@ -28,7 +21,7 @@ export function DialogBasicImage({
         ease: 'easeInOut'
       }}>
       <DialogTrigger>
-        <DialogImage src={triggerImage} alt={alt} className={className} />
+        <em className="text-contrast-100">Bragança Paulista,</em>
       </DialogTrigger>
       <DialogContainer>
         <DialogContent className="relative">
