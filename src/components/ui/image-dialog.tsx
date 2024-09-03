@@ -28,11 +28,11 @@ export function DialogBasicImage({ contentImage, alt }: DialogBasicImageProps) {
           <DialogImage
             src={contentImage}
             alt={alt}
-            className="h-auto w-full max-w-[90vw] rounded-lg object-cover lg:h-[90vh]"
+            className="h-auto w-full max-w-[90vw] rounded-3xl object-cover lg:h-[90vh]"
           />
         </DialogContent>
         <DialogClose
-          className="fixed top-6 flex h-fit w-fit items-center justify-center rounded-lg bg-contrast-50 p-1"
+          className="fixed top-6 flex h-fit w-fit items-center justify-center rounded-full bg-stone-50 p-1"
           variants={{
             initial: { opacity: 0 },
             animate: {
