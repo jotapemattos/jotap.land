@@ -20,14 +20,27 @@ const transition = {
   duration: 0.25
 }
 
-const CRAFT_TABS = ['Crafts', 'Study Cases', 'Side Projects']
+const CRAFT_TABS = [
+  {
+    label: 'Crafts',
+    href: '/crafts'
+  },
+  {
+    label: 'Study cases',
+    href: '/study-cases'
+  },
+  {
+    label: 'Side projects',
+    href: '/side-projects'
+  }
+]
 
 const ITEMS: NavItems[] = [
   {
     id: 1,
     label: 'About',
     title: (
-      <span className="flex items-center gap-2 text-contrast-50">
+      <span className="flex items-center gap-2 font-serif text-contrast-50">
         <UserIcon className="size-5" />
         About
       </span>
@@ -38,7 +51,7 @@ const ITEMS: NavItems[] = [
     id: 2,
     label: 'Lab',
     title: (
-      <span className="flex items-center gap-2 text-contrast-50">
+      <span className="flex items-center gap-2 font-serif text-contrast-50">
         <BeakerIcon className="size-5" />
         Lab
       </span>
@@ -46,7 +59,7 @@ const ITEMS: NavItems[] = [
     content: (
       <div className="flex flex-col">
         <AnimatedBackground
-          className="rounded-lg bg-stone-600 px-2"
+          className="rounded-xl bg-stone-600 px-2"
           transition={{
             type: 'spring',
             bounce: 0.2,
@@ -54,13 +67,13 @@ const ITEMS: NavItems[] = [
           }}
           enableHover>
           {CRAFT_TABS.map((tab, index) => (
-            <button
+            <a
               key={index}
-              data-id={tab}
-              type="button"
+              href={tab.href}
+              data-id={tab.label}
               className="p-2 text-contrast-50 transition-colors duration-300">
-              {tab}
-            </button>
+              {tab.label}
+            </a>
           ))}
         </AnimatedBackground>
       </div>
@@ -70,7 +83,7 @@ const ITEMS: NavItems[] = [
     id: 3,
     label: 'Writing',
     title: (
-      <span className="flex items-center gap-2 text-contrast-50">
+      <span className="flex items-center gap-2 font-serif text-contrast-50">
         <PencilIcon className="size-5" />
         Writing
       </span>
@@ -102,7 +115,7 @@ export default function DockExpandable() {
   return (
     <MotionConfig transition={transition}>
       <div className="fixed bottom-8" ref={ref}>
-        <div className="h-full w-full rounded-2xl border border-zinc-950/10 bg-stone-800">
+        <div className="h-full w-full rounded-3xl bg-stone-800">
           <div className="overflow-hidden">
             <AnimatePresence initial={false} mode="sync">
               {isOpen && !isLink ? (
@@ -146,7 +159,7 @@ export default function DockExpandable() {
                   key={item.id}
                   aria-label={item.label}
                   className={cn(
-                    'relative flex size-fit shrink-0 scale-100 select-none appearance-none items-center justify-center rounded-lg p-2 text-sm text-zinc-500 transition-colors hover:bg-stone-950 hover:text-zinc-100 focus-visible:ring-2 active:scale-[0.98]',
+                    'relative flex size-fit shrink-0 scale-100 select-none appearance-none items-center justify-center rounded-2xl p-2 text-zinc-500 transition-colors hover:bg-stone-950 hover:text-zinc-100 focus-visible:ring-2 active:scale-[0.98]',
                     active === item.id ? 'bg-stone-950 text-stone-300' : ''
                   )}
                   type="button"
@@ -169,11 +182,10 @@ export default function DockExpandable() {
                   key={item.id}
                   aria-label={item.label}
                   className={cn(
-                    'relative flex size-fit shrink-0 scale-100 select-none appearance-none items-center justify-center rounded-lg p-2 text-sm text-zinc-500 transition-colors hover:bg-stone-950 hover:text-zinc-100 focus-visible:ring-2 active:scale-[0.98]',
+                    'relative flex size-fit shrink-0 scale-100 select-none appearance-none items-center justify-center rounded-2xl p-2 text-zinc-500 transition-colors hover:bg-stone-950 hover:text-zinc-100 focus-visible:ring-2 active:scale-[0.98]',
                     active === item.id ? 'bg-stone-950 text-stone-300' : ''
                   )}
-                  onClick={(e) => {
-                    e.preventDefault()
+                  onClick={() => {
                     setIsLink(true)
                     if (!isOpen) setIsOpen(true)
                     if (active === item.id) {
