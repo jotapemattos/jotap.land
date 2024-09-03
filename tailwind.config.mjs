@@ -9,9 +9,6 @@ export default {
         sans: ['Aeonik', ...defaultTheme.fontFamily.sans],
         serif: ['Zodiak', ...defaultTheme.fontFamily.serif]
       },
-      backgroundImage: {
-        'noise-texture': 'url(/noise-texture.png)'
-      },
       colors: {
         contrast: {
           50: '#f0fdfa',
