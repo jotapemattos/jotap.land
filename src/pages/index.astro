@@ -1,13 +1,14 @@
 ---
 import Image from 'astro/components/Image.astro'
 import { AnimatedLink } from '../components/animated-link'
+import { SocialsButton } from '../components/socials-button'
 import { DialogBasicImage } from '../components/ui/image-dialog'
 import Layout from '../layouts/Layout.astro'
 
 const SOCIALS = [
   {
-    label: 'Twitter',
-    href: 'https://x.com/devjotape'
+    label: 'BlueSky',
+    href: 'https://bsky.app/profile/jotapedev.bsky.social'
   },
   {
     label: 'LinkedIn',
@@ -28,7 +29,7 @@ const SOCIALS = [
   <main
     class="mx-auto mb-32 mt-10 flex w-full max-w-screen-sm flex-col items-start gap-16">
     <section
-      class="flex flex-wrap items-center justify-start gap-x-8 font-serif text-2xl leading-tight text-stone-300 [&>div>em>a]:text-contrast-100 [&>div>h1>em]:text-contrast-100">
+      class="flex flex-wrap items-center justify-start gap-x-8 font-serif text-2xl leading-snug text-stone-300 [&>div>em>a]:text-contrast-100 [&>div>h1>em]:text-contrast-100">
       <div class="flex w-full flex-col items-start gap-y-10">
         <Image src="/stone-300-logo.png" alt="Logo" width="40" height="40" />
         <h1>Yo, I'm <em>João Pedro</em></h1>
@@ -49,7 +50,7 @@ const SOCIALS = [
       </div>
     </section>
     <section
-      class="flex flex-col gap-y-8 font-sans text-stone-500 [&>h1]:text-xl [&>h1]:font-medium [&>h1]:text-stone-300 [&>p]:font-light">
+      class="flex flex-col gap-y-8 font-sans text-stone-500 [&>h1]:text-xl [&>h1]:text-stone-300 [&>p]:font-light">
       <h1>About</h1>
       <div
         class="space-y-4 [&>p>a]:decoration-slice [&>p>a]:text-stone-300 [&>p>a]:underline [&>p>a]:decoration-stone-300 [&>p>em]:text-stone-300">
@@ -82,53 +83,20 @@ const SOCIALS = [
         </p>
       </div>
     </section>
-    <section class="mx-auto flex w-full flex-wrap gap-10">
-      {
-        SOCIALS.map((social) => (
-          <a
-            href={social.href}
-            target="_blank"
-            class="group relative inline-flex items-center justify-center rounded-full bg-contrast-50/10 px-2 py-1 text-sm text-contrast-50">
-            <>
-              <span>{social.label}</span>
-              <div class="relative ml-1 h-5 w-5 overflow-hidden">
-                <div class="absolute transition-all duration-200 group-hover:-translate-y-5 group-hover:translate-x-4">
-                  <>
-                    <svg
-                      width="15"
-                      height="15"
-                      viewBox="0 0 15 15"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-5 w-5">
-                      <path
-                        d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9.00001C12 9.27615 11.7761 9.50001 11.5 9.50001C11.2239 9.50001 11 9.27615 11 9.00001V4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z"
-                        fill="currentColor"
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                    <svg
-                      width="15"
-                      height="15"
-                      viewBox="0 0 15 15"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-5 w-5 -translate-x-4">
-                      <path
-                        d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9.00001C12 9.27615 11.7761 9.50001 11.5 9.50001C11.2239 9.50001 11 9.27615 11 9.00001V4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z"
-                        fill="currentColor"
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </>
-                </div>
-              </div>
-            </>
-          </a>
-        ))
-      }
+    <section class="mx-auto flex w-full items-center gap-2">
+      <SocialsButton
+        href="https://bsky.app/profile/jotapedev.bsky.social"
+        text="BlueSky"
+      />
+      <span class="size-0.5 rounded-full bg-stone-100"></span>
+      <SocialsButton
+        href="https://www.linkedin.com/in/jo%C3%A3o-pedro-mattos-rodrigues-camargo/"
+        text="LinkedIn"
+      />
+      <span class="size-0.5 rounded-full bg-stone-100"></span>
+      <SocialsButton href="https://github.com/jotapemattos" text="GitHub" />
+      <span class="size-0.5 rounded-full bg-stone-100"></span>
+      <SocialsButton href="mailto:jotapemattos.dev@gmail.com" text="Email" />
     </section>
   </main>
 </Layout>
