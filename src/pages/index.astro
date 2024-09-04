@@ -4,68 +4,49 @@ import { AnimatedLink } from '../components/animated-link'
 import { SocialsButton } from '../components/socials-button'
 import { DialogBasicImage } from '../components/ui/image-dialog'
 import Layout from '../layouts/Layout.astro'
-
-const SOCIALS = [
-  {
-    label: 'BlueSky',
-    href: 'https://bsky.app/profile/jotapedev.bsky.social'
-  },
-  {
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/jo%C3%A3o-pedro-mattos-rodrigues-camargo/'
-  },
-  {
-    label: 'GitHub',
-    href: 'https://github.com/jotapemattos'
-  },
-  {
-    label: 'Email',
-    href: 'mailto:jotapemattos.dev@gmail.com'
-  }
-]
 ---
 
 <Layout title="João Pedro — Home">
   <main
-    class="mx-auto mb-32 mt-10 flex w-full max-w-screen-sm flex-col items-start gap-16">
+    class="mx-auto mb-32 mt-10 flex w-full max-w-screen-sm flex-col items-start gap-16 p-4 md:p-0">
     <section
-      class="flex flex-wrap items-center justify-start gap-x-8 font-serif text-2xl leading-snug text-stone-300 [&>div>em>a]:text-contrast-100 [&>div>h1>em]:text-contrast-100">
+      class="flex flex-wrap items-center justify-start gap-x-8 font-serif text-2xl leading-snug text-stone-300 max-sm:text-xl [&>div>h1>p]:text-contrast-100 [&>p>a]:text-contrast-100">
       <div class="flex w-full flex-col items-start gap-y-10">
         <Image src="/stone-300-logo.png" alt="Logo" width="40" height="40" />
-        <h1>Yo, I'm <em>João Pedro</em></h1>
+        <h1 class="flex w-full flex-wrap gap-x-2">Yo, I'm <p>João Pedro</p></h1>
       </div>
-      <div class="flex w-full items-center gap-x-2">
-        <span>a software engineer at</span>
-        <em>
-          <AnimatedLink
-            href="https://www.intranetmall.com.br/br/"
-            text="IntranetMall"
-          />
-        </em>
-      </div>
-      <div class="flex w-full items-center gap-x-2">
-        <span>based in</span>
+      <p class="flex w-full flex-wrap gap-x-2">
+        a software engineer at
+        <AnimatedLink
+          href="https://www.intranetmall.com.br/br/"
+          text="IntranetMall"
+        />
+      </p>
+      <span class="flex w-full flex-wrap gap-x-2"
+        >based in
         <DialogBasicImage contentImage="/hometown.png" alt="" client:load />
-        <span>SP, Brazil</span>
-      </div>
+        SP, Brazil
+      </span>
     </section>
     <section
-      class="flex flex-col gap-y-8 font-sans text-stone-500 [&>h1]:text-xl [&>h1]:text-stone-300 [&>p]:font-light">
-      <h1>About</h1>
+      class="flex flex-col gap-y-8 font-sans text-stone-500 [&>p]:font-light">
+      <h1 class="text-stone-300 max-sm:text-base md:text-lg">About</h1>
       <div
-        class="space-y-4 [&>p>a]:decoration-slice [&>p>a]:text-stone-300 [&>p>a]:underline [&>p>a]:decoration-stone-300 [&>p>em]:text-stone-300">
+        class="space-y-4 text-sm transition-colors duration-300 md:text-base [&>p>em]:text-stone-300">
         <p>
           I work as a <em>Software Engineer</em> at IntranetMall, straddling the
           intersection of <em>pixels and code</em>. My passion lies in the sweet
           spot where <em>form meets function</em>, turning complex ideas into
           <em>polished digital experiences</em>. Beyond work, what truly
-          inspires my craft is savoring great food, <a
+          inspires my craft is taking pictures, <a
+            class="transition-colors duration-300 hover:text-stone-300"
             href="https://letterboxd.com/jotapzn/"
             target="_blank">diving into movies</a
-          >, and <a
+          > and <a
+            class="transition-colors duration-300 hover:text-stone-300"
             href="https://open.spotify.com/user/yw78qs7x7uerkgmw6ngpsd75n"
             target="_blank">listening to good music</a
-          >.
+          > — I&apos;m an art enthusiast.
         </p>
         <p>
           As a <em>creative kid</em> with an insatiable curiosity, I was always drawing,

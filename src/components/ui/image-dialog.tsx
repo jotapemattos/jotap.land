@@ -21,7 +21,7 @@ export function DialogBasicImage({ contentImage, alt }: DialogBasicImageProps) {
         ease: 'easeInOut'
       }}>
       <DialogTrigger>
-        <em className="text-contrast-100">Bragança Paulista,</em>
+        <p className="text-contrast-100">Bragança Paulista,</p>
       </DialogTrigger>
       <DialogContainer>
         <DialogContent className="relative">
