@@ -1,0 +1,16 @@
+---
+import { Button } from '../components/ui/button'
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title="404 — Not Found">
+  <main
+    class="mx-auto flex w-full max-w-screen-md flex-col items-center justify-center gap-10">
+    <h1 class="font-serif text-4xl font-bold text-contrast-50">
+      404 — I can't find what you were looking for
+    </h1>
+    <div>
+      <Button garnish href="./" title="Take me home" as="a" />
+    </div>
+  </main>
+</Layout>
