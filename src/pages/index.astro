@@ -1,7 +1,7 @@
 ---
 import Image from 'astro/components/Image.astro'
 import { AnimatedLink } from '../components/animated-link'
-import { SocialsButton } from '../components/socials-button'
+import { Button } from '../components/ui/button'
 import { DialogBasicImage } from '../components/ui/image-dialog'
 import Layout from '../layouts/Layout.astro'
 ---
@@ -57,27 +57,50 @@ import Layout from '../layouts/Layout.astro'
         </p>
         <p>
           If this combination interests you, I extend a warm invitation to my
-          <em>humble abode on the internet</em>. Here, I'll share my musings
-          about the path to becoming a great <em>design engineer</em>, recount
-          my <em>software adventures</em>, and perhaps drop some random thoughts
-          along the way.
+          <em>humble abode on the internet</em>. Here, I'll share my side
+          projects, case studies, some of my crafts and also my musings about
+          the path to becoming a great <em>design engineer</em>, recount my <em
+            >software adventures</em
+          >, and perhaps drop some random thoughts along the way.
         </p>
       </div>
     </section>
     <section class="mx-auto flex w-full items-center gap-2">
-      <SocialsButton
+      <Button
         href="https://bsky.app/profile/jotapedev.bsky.social"
-        text="BlueSky"
+        title="BlueSky"
+        as="a"
+        variant="link"
+        className="p-0"
+        external
       />
       <span class="size-0.5 rounded-full bg-stone-100"></span>
-      <SocialsButton
+      <Button
         href="https://www.linkedin.com/in/jo%C3%A3o-pedro-mattos-rodrigues-camargo/"
-        text="LinkedIn"
+        title="LinkedIn"
+        as="a"
+        variant="link"
+        className="p-0"
+        external
       />
       <span class="size-0.5 rounded-full bg-stone-100"></span>
-      <SocialsButton href="https://github.com/jotapemattos" text="GitHub" />
+      <Button
+        href="https://github.com/jotapemattos"
+        title="GitHub"
+        as="a"
+        variant="link"
+        className="p-0"
+        external
+      />
       <span class="size-0.5 rounded-full bg-stone-100"></span>
-      <SocialsButton href="mailto:jotapemattos.dev@gmail.com" text="Email" />
+      <Button
+        href="mailto:jotapemattos.dev@gmail.com"
+        title="Email"
+        as="a"
+        variant="link"
+        className="p-0"
+        external
+      />
     </section>
   </main>
 </Layout>
