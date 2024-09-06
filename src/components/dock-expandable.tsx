@@ -59,7 +59,7 @@ const ITEMS: NavItems[] = [
     content: (
       <div className="flex flex-col">
         <AnimatedBackground
-          className="rounded-xl bg-stone-600 px-2"
+          className="rounded-lg bg-stone-600 px-2"
           transition={{
             type: 'spring',
             bounce: 0.2,
@@ -114,8 +114,10 @@ export default function DockExpandable() {
 
   return (
     <MotionConfig transition={transition}>
-      <div className="fixed bottom-8" ref={ref}>
-        <div className="h-full w-full rounded-3xl bg-stone-800">
+      <div
+        className="fixed bottom-4 rounded-2xl bg-gradient-to-t from-stone-950/90 to-stone-900/70 p-px backdrop-blur-[6px] sm:bottom-8"
+        ref={ref}>
+        <div className="h-full w-full rounded-2xl border border-stone-400/10">
           <div className="overflow-hidden">
             <AnimatePresence initial={false} mode="sync">
               {isOpen && !isLink ? (
@@ -152,14 +154,38 @@ export default function DockExpandable() {
               ) : null}
             </AnimatePresence>
           </div>
-          <div className="flex space-x-2 p-2" ref={menuRef}>
+          <div
+            className="flex space-x-2 px-2 py-1.5 text-sm md:text-base"
+            ref={menuRef}>
             {ITEMS.map((item) =>
-              !item.href ? (
+              item.href ? (
+                <a
+                  href={item.href}
+                  key={item.id}
+                  aria-label={item.label}
+                  className={cn(
+                    'relative flex size-fit shrink-0 scale-100 select-none appearance-none items-center justify-center rounded-[10px] px-2 py-1.5 text-zinc-500 transition-colors hover:bg-stone-950 hover:text-zinc-100 focus-visible:ring-2 active:scale-[0.98]',
+                    active === item.id ? 'bg-stone-950 text-stone-300' : ''
+                  )}
+                  onClick={() => {
+                    setIsLink(true)
+                    if (!isOpen) setIsOpen(true)
+                    if (active === item.id) {
+                      setIsOpen(false)
+                      setActive(null)
+                      return
+                    }
+
+                    setActive(item.id)
+                  }}>
+                  {item.title}
+                </a>
+              ) : (
                 <button
                   key={item.id}
                   aria-label={item.label}
                   className={cn(
-                    'relative flex size-fit shrink-0 scale-100 select-none appearance-none items-center justify-center rounded-2xl p-2 text-zinc-500 transition-colors hover:bg-stone-950 hover:text-zinc-100 focus-visible:ring-2 active:scale-[0.98]',
+                    'relative flex size-fit shrink-0 scale-100 select-none appearance-none items-center justify-center rounded-[10px] px-2 py-1.5 text-zinc-500 transition-colors hover:bg-stone-950 hover:text-zinc-100 focus-visible:ring-2 active:scale-[0.98]',
                     active === item.id ? 'bg-stone-950 text-stone-300' : ''
                   )}
                   type="button"
@@ -176,28 +202,6 @@ export default function DockExpandable() {
                   }}>
                   {item.title}
                 </button>
-              ) : (
-                <a
-                  href={item.href}
-                  key={item.id}
-                  aria-label={item.label}
-                  className={cn(
-                    'relative flex size-fit shrink-0 scale-100 select-none appearance-none items-center justify-center rounded-2xl p-2 text-zinc-500 transition-colors hover:bg-stone-950 hover:text-zinc-100 focus-visible:ring-2 active:scale-[0.98]',
-                    active === item.id ? 'bg-stone-950 text-stone-300' : ''
-                  )}
-                  onClick={() => {
-                    setIsLink(true)
-                    if (!isOpen) setIsOpen(true)
-                    if (active === item.id) {
-                      setIsOpen(false)
-                      setActive(null)
-                      return
-                    }
-
-                    setActive(item.id)
-                  }}>
-                  {item.title}
-                </a>
               )
             )}
           </div>
