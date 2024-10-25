@@ -28,7 +28,7 @@ export function DialogBasicImage({ contentImage, alt }: DialogBasicImageProps) {
           <DialogImage
             src={contentImage}
             alt={alt}
-            className="h-auto w-full max-w-[90vw] rounded-3xl object-cover lg:h-[90vh]"
+            className="h-auto w-full max-w-[90vw] rounded-3xl object-cover lg:h-[70vh] lg:w-[50vw]"
           />
         </DialogContent>
         <DialogClose

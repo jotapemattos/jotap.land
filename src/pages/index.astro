@@ -1,6 +1,5 @@
 ---
 import Image from 'astro/components/Image.astro'
-import { AnimatedLink } from '../components/animated-link'
 import { Button } from '../components/ui/button'
 import { DialogBasicImage } from '../components/ui/image-dialog'
 import Layout from '../layouts/Layout.astro'
@@ -8,22 +7,17 @@ import Layout from '../layouts/Layout.astro'
 
 <Layout title="João Pedro — Home">
   <main
-    class="mx-auto mb-32 mt-10 flex w-full max-w-screen-sm flex-col items-start gap-16 p-4 md:p-0">
+    class="mx-auto mb-32 mt-10 flex w-full max-w-screen-sm flex-col items-start gap-10 p-4 md:p-0">
     <section
       class="flex flex-wrap items-center justify-start gap-x-8 font-serif text-2xl leading-snug text-stone-300 max-sm:text-xl [&>div>h1>p]:text-contrast-100 [&>p>a]:text-contrast-100">
       <div class="flex w-full flex-col items-start gap-y-10">
         <Image src="/stone-300-logo.png" alt="Logo" width="40" height="40" />
-        <h1 class="flex w-full flex-wrap gap-x-2">Yo, I'm <p>João Pedro</p></h1>
+        <h1 class="flex w-full flex-wrap gap-x-2">
+          Yo, <p>João Pedro</p> here
+        </h1>
       </div>
-      <p class="flex w-full flex-wrap gap-x-2">
-        a software engineer at
-        <AnimatedLink
-          href="https://www.intranetmall.com.br/br/"
-          text="IntranetMall"
-        />
-      </p>
       <span class="flex w-full flex-wrap gap-x-2"
-        >based in
+        >I'm a software engineer based in
         <DialogBasicImage contentImage="/hometown.png" alt="" client:load />
         SP, Brazil
       </span>
@@ -34,34 +28,42 @@ import Layout from '../layouts/Layout.astro'
       <div
         class="space-y-4 text-sm transition-colors duration-300 md:text-base [&>p>em]:text-stone-300">
         <p>
-          I work as a <em>Software Engineer</em> at IntranetMall, straddling the
-          intersection of <em>pixels and code</em>. My passion lies in the sweet
-          spot where <em>form meets function</em>, turning complex ideas into
+          Recently I felt the <em>need to journaling my life</em> — we only live
+          once, like, why not? —, so I decided to combine it with my software engineer
+          skills and <em>build a place</em> where I could share some stuff. So, this
+          is more than a portfolio. I'll for sure <em>share</em> some <em
+            >work stuff, case studies and side projects
+          </em> here, but I'm really looking forward to perhaps drop here <em
+            >life updates and some thoughts of mine</em
+          >. To start, let me introduce myself.
+        </p>
+        <p>
+          I work as a <em>Software Engineer</em> at <a
+            href="https://www.intranetmall.com.br/br/"
+            target="_blank"
+            class="group inline-flex items-center gap-x-1 transition-all duration-200 hover:text-stone-200 hover:underline"
+            rel="noopener noreferrer">
+            IntranetMall
+          </a>
+          , straddling the intersection of <em>pixels and code</em>. My passion
+          lies in turning
+          complex ideas into
           <em>polished digital experiences</em>. Beyond work, what truly
-          inspires my craft is taking pictures, <a
+          fires me up is taking pictures, <a
             class="transition-colors duration-300 hover:text-stone-300"
             href="https://letterboxd.com/jotapzn/"
             target="_blank">diving into movies</a
-          > and <a
+          >, <a
             class="transition-colors duration-300 hover:text-stone-300"
             href="https://open.spotify.com/user/yw78qs7x7uerkgmw6ngpsd75n"
             target="_blank">listening to good music</a
-          > — I&apos;m an art enthusiast.
+          > and try and cook new foods.
         </p>
         <p>
-          As a <em>creative kid</em> with an insatiable curiosity, I was always drawing,
-          building, and seeking to understand the world around me. It didn't take
+          As a <em>creative kid </em> with an insatiable curiosity, it didn't take
           long for me to realize that I would love to <em
             >create for the web.</em
           >
-        </p>
-        <p>
-          If this combination interests you, I extend a warm invitation to my
-          <em>humble abode on the internet</em>. Here, I'll share my side
-          projects, case studies, some of my crafts and also my musings about
-          the path to becoming a great <em>design engineer</em>, recount my <em
-            >software adventures</em
-          >, and perhaps drop some random thoughts along the way.
         </p>
       </div>
     </section>
