@@ -40,7 +40,7 @@ const ITEMS: NavItems[] = [
     id: 1,
     label: 'About',
     title: (
-      <span className="flex items-center gap-2 font-serif text-contrast-50">
+      <span className="flex items-center gap-2 text-contrast-50">
         <UserIcon className="size-5" />
         About
       </span>
@@ -51,7 +51,7 @@ const ITEMS: NavItems[] = [
     id: 2,
     label: 'Lab',
     title: (
-      <span className="flex items-center gap-2 font-serif text-contrast-50">
+      <span className="flex items-center gap-2 text-contrast-50">
         <BeakerIcon className="size-5" />
         Lab
       </span>
@@ -83,7 +83,7 @@ const ITEMS: NavItems[] = [
     id: 3,
     label: 'Writing',
     title: (
-      <span className="flex items-center gap-2 font-serif text-contrast-50">
+      <span className="flex items-center gap-2 text-contrast-50">
         <PencilIcon className="size-5" />
         Writing
       </span>
