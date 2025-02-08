@@ -1,2 +1,4 @@
-dist
-node_modules
+dist/
+src/components/ui/
+src/content/**/*.md
+src/content/**/*.mdx
