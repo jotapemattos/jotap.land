@@ -3,10 +3,10 @@
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import {
   AnimatePresence,
-  motion,
   MotionConfig,
   type Transition,
-  type Variant
+  type Variant,
+  motion
 } from 'framer-motion'
 import React, {
   useCallback,
@@ -113,7 +113,8 @@ function DialogTrigger({
       role="button"
       aria-haspopup="dialog"
       aria-expanded={isOpen}
-      aria-controls={`dialog-content-${uniqueId}`}>
+      aria-controls={`dialog-content-${uniqueId}`}
+    >
       {children}
     </motion.div>
   )
@@ -196,7 +197,8 @@ function DialogContent({ children, className, style }: DialogContent) {
       role="dialog"
       aria-modal="true"
       aria-labelledby={`dialog-title-${uniqueId}`}
-      aria-describedby={`dialog-description-${uniqueId}`}>
+      aria-describedby={`dialog-description-${uniqueId}`}
+    >
       {children}
     </motion.div>
   )
@@ -254,7 +256,8 @@ function DialogTitle({ children, className, style }: DialogTitleProps) {
       layoutId={`dialog-title-container-${uniqueId}`}
       className={className}
       style={style}
-      layout>
+      layout
+    >
       {children}
     </motion.div>
   )
@@ -273,7 +276,8 @@ function DialogSubtitle({ children, className, style }: DialogSubtitleProps) {
     <motion.div
       layoutId={`dialog-subtitle-container-${uniqueId}`}
       className={className}
-      style={style}>
+      style={style}
+    >
       {children}
     </motion.div>
   )
@@ -311,7 +315,8 @@ function DialogDescription({
       initial="initial"
       animate="animate"
       exit="exit"
-      id={`dialog-description-${uniqueId}`}>
+      id={`dialog-description-${uniqueId}`}
+    >
       {children}
     </motion.div>
   )
@@ -365,7 +370,8 @@ function DialogClose({ children, className, variants }: DialogCloseProps) {
       initial="initial"
       animate="animate"
       exit="exit"
-      variants={variants}>
+      variants={variants}
+    >
       {children || <XMarkIcon className="size-6" />}
     </motion.button>
   )

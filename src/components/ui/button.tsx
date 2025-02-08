@@ -50,7 +50,8 @@ export function Button({
       onClick={onClick}
       rel={external ? 'noopener noreferrer' : undefined}
       target={external ? '_blank' : undefined}
-      type={type}>
+      type={type}
+    >
       {garnish && <Garnish />}
       {title}
       {children}
