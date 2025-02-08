@@ -1,75 +1,84 @@
 ---
-import Image from 'astro/components/Image.astro'
-import { Button } from '../components/ui/button'
-import { DialogBasicImage } from '../components/ui/image-dialog'
-import Layout from '../layouts/Layout.astro'
+import Image from "astro/components/Image.astro";
+import { Button } from "../components/ui/button";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="João Pedro — Home">
   <main
-    class="mx-auto mb-32 mt-10 flex w-full max-w-screen-sm flex-col items-start gap-10 p-4 md:p-0">
+    class="mx-auto mt-32 flex w-full max-w-screen-sm flex-col items-start gap-10 p-4 md:p-0"
+  >
     <section
-      class="flex flex-wrap items-center justify-start gap-x-8 font-serif text-2xl leading-snug text-stone-300 max-sm:text-xl [&>div>h1>p]:text-contrast-100 [&>p>a]:text-contrast-100">
+      class="flex flex-wrap items-center justify-start gap-x-8 font-serif text-3xl max-sm:text-xl"
+    >
       <div class="flex w-full flex-col items-start gap-y-10">
         <Image src="/stone-300-logo.png" alt="Logo" width="40" height="40" />
-        <h1 class="flex w-full flex-wrap gap-x-2">
-          Yo, <p>João Pedro</p> here
+        <h1 class="flex w-full flex-wrap gap-x-2 text-white">
+          Yo, João Pedro here
         </h1>
       </div>
-      <span class="flex w-full flex-wrap gap-x-2"
-        >I'm a software engineer based in
-        <DialogBasicImage contentImage="/hometown.png" alt="" client:load />
-        SP, Brazil
-      </span>
+      <div class="flex w-full flex-wrap gap-x-2 text-stone-400">
+        I'm a software engineer based in Brazil
+      </div>
     </section>
     <section
-      class="flex flex-col gap-y-8 font-sans text-stone-500 [&>p]:font-light">
-      <h1 class="text-stone-300 max-sm:text-base md:text-lg">About</h1>
+      class="flex flex-col gap-y-6 font-sans leading-loose text-stone-400 [&>p]:font-light"
+    >
+      <h2 class="font-serif text-zinc-50 max-sm:text-base md:text-xl">
+        Brief introduction to what this is
+      </h2>
       <div
-        class="space-y-4 text-sm transition-colors duration-300 md:text-base [&>p>em]:text-stone-300">
+        class="space-y-4 text-sm transition-colors duration-300 md:text-base [&>p>em]:text-zinc-50"
+      >
         <p>
-          Recently I felt the <em>need to journal my life</em> — we only live
-          once, after all —, so I decided to combine it with my software engineer
-          skills and <em>build a space</em> where I could share my experiences. This
-          is more than just a portfolio. While I'll certainly <em>share work-related content, case studies and side projects
-          </em> here, I'm really looking forward to posting<em
-            > life updates and personal thoughts as well</em
-          >. Let me start by introducing myself.
+          Recently I felt the <em>need to journal my life</em> — we only live once,
+          after all —, so I decided to combine it with my software engineer skills
+          and <em>build a space</em> where I could share my experiences. This is
+          more than just a portfolio. While I'll certainly share <em
+            >work-related content, case studies</em
+          > and <em>side projects </em> here, I'm really looking forward to posting
+          some<em> personal thoughts</em> as well.
         </p>
+      </div>
+    </section>
+    <section
+      class="flex flex-col gap-y-6 font-sans leading-loose text-stone-400 [&>p]:font-light"
+    >
+      <h2 class="font-serif text-zinc-50 max-sm:text-base md:text-xl">Now</h2>
+      <div
+        class="space-y-4 text-sm transition-colors duration-300 md:text-base [&>p>em]:text-zinc-50"
+      >
         <p>
-          I work as a <em>Software Engineer</em> at <a
+          Currently I'm at <a
             href="https://www.intranetmall.com.br/br/"
             target="_blank"
             class="group inline-flex items-center gap-x-1 transition-all duration-200 hover:text-stone-200 hover:underline"
-            rel="noopener noreferrer">
+            rel="noopener noreferrer"
+          >
             IntranetMall
-          </a>
-          , straddling the intersection of <em>pixels and code</em>. My passion
-          lies in turning
-          complex ideas into
-          <em>polished digital experiences</em>. Beyond work, what truly
-          fires me up is photography, <a
-            class="transition-colors duration-300 hover:text-stone-300"
+          </a> as a <em>Software Engineer</em>, working to turn complex ideas
+          into
+          <em>polished digital experiences</em>. My main focus right know is on
+          front-end development and design, and how can I deliver a exclusive
+          experience to the users.
+        </p>
+        <p>
+          Beyond work, what truly fires me up in the moment is photography, <a
+            class="transition-colors duration-300 hover:text-white"
             href="https://letterboxd.com/jotapzn/"
             target="_blank">diving into movies</a
           >, <a
-            class="transition-colors duration-300 hover:text-stone-300"
+            class="transition-colors duration-300 hover:text-white"
             href="https://open.spotify.com/user/yw78qs7x7uerkgmw6ngpsd75n"
             target="_blank">listening to good music</a
           > and experimenting with new recipes.
-        </p>
-        <p>
-          As a <em>creative kid </em> with an insatiable curiosity, it didn't take
-          long for me to realize that I would love to <em
-            >create for the web.</em
-          >
         </p>
       </div>
     </section>
     <section class="mx-auto flex w-full items-center gap-2">
       <Button
-        href="https://bsky.app/profile/jotapedev.bsky.social"
-        title="BlueSky"
+        href="https://x.com/devjotape"
+        title="Twitter"
         as="a"
         variant="link"
         className="p-0"

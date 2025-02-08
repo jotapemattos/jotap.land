@@ -1,23 +1,67 @@
 ---
-import Layout from '../layouts/Layout.astro'
-const projects = [
-  {
-    name: 'Sabor Com Amor',
-    image: '',
-    repo: '',
-    deploy: ''
-  }
-]
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import { contentfulClient } from "../lib/contentful/client.ts";
+import type { Project } from "../lib/contentful/types.ts";
+
+const entries = await contentfulClient.getEntries<Project>({
+  content_type: "project",
+});
+
+const projects = entries.items.map((item) => {
+  const {
+    name,
+    tagline,
+    description,
+    thumnbnailImage,
+    projectImages,
+    githubUrl,
+    deployUrl,
+  } = item.fields;
+  return {
+    name,
+    tagline,
+    description,
+    thumnbnailImage,
+    projectImages,
+    githubUrl,
+    deployUrl,
+  };
+});
 ---
 
 <Layout title="João Pedro — Side Projects">
   <main
-    class="mx-auto mb-32 mt-10 flex w-full max-w-screen-sm flex-col items-start gap-16 p-4 md:p-0">
-    <section class="flex flex-col gap-2 text-stone-300">
+    class="mx-auto mt-32 flex w-full max-w-screen-sm flex-col items-start gap-12 p-4 md:p-0"
+  >
+    <section class="flex flex-col p-2 gap-2 text-zinc-50">
       <h1 class="font-serif text-2xl">Side Projects</h1>
-      <p class="text-stone-500">
-        Here you&apos;ll find some of what I&apos;m capable to do.
+      <p class="text-stone-400">
+        These are some projects I built as a freelancer
       </p>
+    </section>
+    <section class="flex flex-col gap-2 w-full">
+      {
+        projects.map((project) => {
+          return (
+            <a href={`/side-projects/${project.name}`}>
+              <div class="flex p-2 hover:bg-stone-800 rounded-lg transition-colors duration-300 justify-between">
+                <div class="flex flex-col gap-px items-start">
+                  <h2 class="font-serif text-lg text-white">{project.name}</h2>
+                  <p class="text-sm text-stone-500 italic">{project.tagline}</p>
+                </div>
+                <Image
+                  class="rounded-[4px]"
+                  src="/braganca.jpg"
+                  alt="Logo"
+                  width="120"
+                  height="120"
+                />
+              </div>
+            </a>
+          );
+        })
+      }
     </section>
   </main>
 </Layout>
