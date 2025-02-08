@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 ::selection {
-  @apply bg-zinc-400/30 text-zinc-50;
+  @apply bg-stone-400/30 text-stone-50;
 }
 
 @layer base {
   @font-face {
-    font-family: 'Aeonik';
-    src: url(/fonts/Aeonik.otf) format('otf');
+    font-family: "Aeonik";
+    src: url(/fonts/Aeonik.otf) format("otf");
   }
   @font-face {
-    font-family: 'Zodiak';
-    src: url(/fonts/Zodiak.otf) format('otf');
+    font-family: "Zodiak";
+    src: url(/fonts/InstrumentSerif.ttf) format("ttf");
   }
 }
