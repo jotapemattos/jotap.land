@@ -1,0 +1,73 @@
+---
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import { Image } from "astro:assets";
+import type { Asset } from "contentful";
+import { contentfulClient } from "../../lib/contentful/client";
+import type { ProjectEntry } from "../../lib/contentful/types.ts";
+import Layout from "../../layouts/Layout.astro";
+import { GlobeAltIcon } from "@heroicons/react/24/outline";
+
+let project;
+const { slug } = Astro.params;
+
+try {
+  const data = await contentfulClient.getEntries<ProjectEntry>({
+    content_type: "project",
+    "fields.slug": slug,
+  });
+  const { name, description, projectImages, deployUrl, githubUrl, stack } =
+    data.items[0].fields;
+  project = { name, description, projectImages, deployUrl, githubUrl, stack };
+} catch (error) {
+  console.log(error);
+  return Astro.redirect("/404");
+}
+---
+
+<Layout title={`${project.name} — João Pedro`}>
+  <main
+    class="mx-auto mt-24 flex w-full mb-32 max-w-3xl flex-col items-start gap-12 p-6 lg:p-0"
+  >
+    <header class="flex flex-col max-w-lg mx-auto w-full gap-2 text-zinc-100">
+      <h1 class="font-serif text-2xl">{project.name}</h1>
+      <p class="text-stone-400 text-sm">
+        {project.description}
+      </p>
+    </header>
+    <div class="flex flex-col gap-6 w-full">
+      {
+        project.projectImages.map((image) => {
+          const imageUrl = (image as Asset).fields?.file?.url;
+          return (
+            <Image
+              class="w-full rounded-lg"
+              src={`https:${imageUrl}`}
+              alt="Logo"
+              width="1000"
+              height="500"
+            />
+          );
+        })
+      }
+    </div>
+    <section class="w-full max-w-lg flex flex-col gap-4 mx-auto">
+      <hr class="w-full border-b-px border-stone-600 border-dashed" />
+      <div class="space-y-2">
+        <h3 class="font-serif text-stone-400 text-sm">Stack</h3>
+        <article
+          class="text-zinc-100 text-sm"
+          set:html={documentToHtmlString(project.stack)}
+        />
+      </div>
+      <hr class="w-full border-b-px border-stone-600 border-dashed" />
+      <a
+        href={project.deployUrl}
+        target="_blank"
+        class="w-fit flex items-center gap-2 text-neutral-300 bg-stone-950 rounded-full px-2 py-1"
+      >
+        <GlobeAltIcon className="size-5 text-neutral-300" />
+        <span class="text-sm">saborcomamor.vercel.app</span>
+      </a>
+    </section>
+  </main>
+</Layout>
