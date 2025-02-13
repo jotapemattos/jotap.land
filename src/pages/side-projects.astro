@@ -2,60 +2,69 @@
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import { contentfulClient } from "../lib/contentful/client.ts";
-import type { Project } from "../lib/contentful/types.ts";
+import type { ProjectEntry } from "../lib/contentful/types";
+import type { Asset } from "contentful";
 
-const entries = await contentfulClient.getEntries<Project>({
+const entries = await contentfulClient.getEntries<ProjectEntry>({
   content_type: "project",
+  include: 2,
 });
 
 const projects = entries.items.map((item) => {
   const {
     name,
-    tagline,
     description,
-    thumnbnailImage,
-    projectImages,
+    tagline,
     githubUrl,
     deployUrl,
+    thumbnailImage,
+    projectImages,
+    slug,
   } = item.fields;
+
+  const thumbnailAsset = thumbnailImage as Asset;
+
   return {
     name,
-    tagline,
     description,
-    thumnbnailImage,
-    projectImages,
+    tagline,
     githubUrl,
     deployUrl,
+    thumbnailImage: thumbnailAsset.fields?.file?.url,
+    projectImages,
+    slug,
   };
 });
 ---
 
-<Layout title="João Pedro — Side Projects">
+<Layout title="Side Projects — João Pedro">
   <main
-    class="mx-auto mt-32 flex w-full max-w-screen-sm flex-col items-start gap-12 p-4 md:p-0"
+    class="mx-auto mt-12 mb-24 md:mt-24 flex w-full max-w-xl flex-col items-start gap-6 p-6 md:p-0"
   >
-    <section class="flex flex-col p-2 gap-2 text-zinc-50">
+    <header class="flex flex-col gap-2 text-zinc-100 p-2">
       <h1 class="font-serif text-2xl">Side Projects</h1>
       <p class="text-stone-400">
-        These are some projects I built as a freelancer
+        Meet some of selected projects I've worked on.
       </p>
-    </section>
+    </header>
     <section class="flex flex-col gap-2 w-full">
       {
         projects.map((project) => {
           return (
-            <a href={`/side-projects/${project.name}`}>
-              <div class="flex p-2 hover:bg-stone-800 rounded-lg transition-colors duration-300 justify-between">
+            <a class="w-full" href={`/side-projects/${project.slug}`}>
+              <div class="flex p-2 space-x-2 hover:bg-stone-800 rounded-lg w-full transition-colors duration-300 justify-between">
                 <div class="flex flex-col gap-px items-start">
-                  <h2 class="font-serif text-lg text-white">{project.name}</h2>
+                  <h2 class="font-serif text-lg text-zinc-200">
+                    {project.name}
+                  </h2>
                   <p class="text-sm text-stone-500 italic">{project.tagline}</p>
                 </div>
                 <Image
                   class="rounded-[4px]"
-                  src="/braganca.jpg"
+                  src={`https:${project.thumbnailImage}`}
                   alt="Logo"
                   width="120"
-                  height="120"
+                  height="80"
                 />
               </div>
             </a>
