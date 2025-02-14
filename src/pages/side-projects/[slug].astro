@@ -17,7 +17,14 @@ try {
   });
   const { name, description, projectImages, deployUrl, githubUrl, stack } =
     data.items[0].fields;
-  project = { name, description, projectImages, deployUrl, githubUrl, stack };
+  project = {
+    name,
+    description,
+    projectImages,
+    deployUrl,
+    githubUrl,
+    stack: documentToHtmlString(stack),
+  };
 } catch (error) {
   console.log(error);
   return Astro.redirect("/404");
@@ -54,10 +61,7 @@ try {
       <hr class="w-full border-b-px border-stone-600 border-dashed" />
       <div class="space-y-2">
         <h3 class="font-serif text-stone-400 text-sm">Stack</h3>
-        <article
-          class="text-zinc-100 text-sm"
-          set:html={documentToHtmlString(project.stack)}
-        />
+        <article class="text-zinc-100 text-sm" set:html={project.stack} />
       </div>
       <hr class="w-full border-b-px border-stone-600 border-dashed" />
       <a
