@@ -1,9 +1,9 @@
 ---
 import Image from "astro/components/Image.astro";
-import Layout from "../layouts/Layout.astro";
-import { contentfulClient } from "../lib/contentful/client.ts";
-import type { ProjectEntry } from "../lib/contentful/types";
 import type { Asset } from "contentful";
+import { contentfulClient } from "../../lib/contentful/client";
+import type { ProjectEntry } from "../../lib/contentful/types";
+import Layout from "../../layouts/Layout.astro";
 
 const entries = await contentfulClient.getEntries<ProjectEntry>({
   content_type: "project",
