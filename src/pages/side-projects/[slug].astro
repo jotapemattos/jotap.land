@@ -5,45 +5,43 @@ import type { Asset } from "contentful";
 import { contentfulClient } from "../../lib/contentful/client";
 import type { ProjectEntry } from "../../lib/contentful/types.ts";
 import Layout from "../../layouts/Layout.astro";
-import { GlobeAltIcon } from "@heroicons/react/24/outline";
+import { FolderIcon, GlobeAltIcon } from "@heroicons/react/24/outline";
 
-let project;
-const { slug } = Astro.params;
-
-try {
-  const data = await contentfulClient.getEntries<ProjectEntry>({
+export async function getStaticPaths() {
+  const { items } = await contentfulClient.getEntries<ProjectEntry>({
     content_type: "project",
-    "fields.slug": slug,
   });
-  const { name, description, projectImages, deployUrl, githubUrl, stack } =
-    data.items[0].fields;
-  project = {
-    name,
-    description,
-    projectImages,
-    deployUrl,
-    githubUrl,
-    stack: documentToHtmlString(stack),
-  };
-} catch (error) {
-  console.log(error);
-  return Astro.redirect("/404");
+  const pages = items.map((item) => ({
+    params: { slug: item.fields.slug },
+    props: {
+      name: item.fields.name,
+      description: item.fields.description,
+      projectImages: item.fields.projectImages,
+      deployUrl: item.fields.deployUrl,
+      githubUrl: item.fields.githubUrl,
+      stack: documentToHtmlString(item.fields.stack),
+    },
+  }));
+  return pages;
 }
+
+const { name, description, projectImages, deployUrl, githubUrl, stack } =
+  Astro.props;
 ---
 
-<Layout title={`${project.name} — João Pedro`}>
+<Layout title={`${name} — João Pedro`}>
   <main
     class="mx-auto mt-24 flex w-full mb-32 max-w-3xl flex-col items-start gap-12 p-6 lg:p-0"
   >
     <header class="flex flex-col max-w-lg mx-auto w-full gap-2 text-zinc-100">
-      <h1 class="font-serif text-2xl">{project.name}</h1>
+      <h1 class="font-serif text-2xl">{name}</h1>
       <p class="text-stone-400 text-sm">
-        {project.description}
+        {description}
       </p>
     </header>
     <div class="flex flex-col gap-6 w-full">
       {
-        project.projectImages.map((image) => {
+        projectImages.map((image) => {
           const imageUrl = (image as Asset).fields?.file?.url;
           return (
             <Image
@@ -61,17 +59,35 @@ try {
       <hr class="w-full border-b-px border-stone-600 border-dashed" />
       <div class="space-y-2">
         <h3 class="font-serif text-stone-400 text-sm">Stack</h3>
-        <article class="text-zinc-100 text-sm" set:html={project.stack} />
+        <article class="text-zinc-100 text-sm" set:html={stack} />
       </div>
       <hr class="w-full border-b-px border-stone-600 border-dashed" />
-      <a
-        href={project.deployUrl}
-        target="_blank"
-        class="w-fit flex items-center gap-2 text-neutral-300 bg-stone-950 rounded-full px-2 py-1"
-      >
-        <GlobeAltIcon className="size-5 text-neutral-300" />
-        <span class="text-sm">saborcomamor.vercel.app</span>
-      </a>
+      <div class="w-full flex items-center gap-4">
+        {
+          deployUrl ? (
+            <a
+              href={`https://${deployUrl}`}
+              target="_blank"
+              class="w-fit flex items-center gap-2 text-neutral-300 bg-stone-950 rounded-full px-2 py-1"
+            >
+              <GlobeAltIcon className="size-5 text-neutral-300" />
+              <span class="text-sm">{deployUrl}</span>
+            </a>
+          ) : null
+        }
+        {
+          githubUrl ? (
+            <a
+              href={githubUrl}
+              target="_blank"
+              class="w-fit flex items-center gap-2 text-neutral-300 bg-stone-950 rounded-full px-2 py-1"
+            >
+              <FolderIcon className="size-5 text-neutral-300" />
+              <span class="text-sm">saborcomamor.vercel.app</span>
+            </a>
+          ) : null
+        }
+      </div>
     </section>
   </main>
 </Layout>
