@@ -1,76 +1,35 @@
 ---
-import Image from "astro/components/Image.astro";
-import type { Asset } from "contentful";
-import { contentfulClient } from "../../lib/contentful/client";
-import type { ProjectEntry } from "../../lib/contentful/types";
+import EntryList from "../../components/EntryList.astro";
+import PageHeader from "../../components/PageHeader.astro";
 import Layout from "../../layouts/Layout.astro";
+import { getSideProjects } from "../../lib/content";
 
-const entries = await contentfulClient.getEntries<ProjectEntry>({
-  content_type: "project",
-  include: 2,
-});
-
-const projects = entries.items.map((item) => {
-  const {
-    name,
-    description,
-    tagline,
-    githubUrl,
-    deployUrl,
-    thumbnailImage,
-    projectImages,
-    slug,
-  } = item.fields;
-
-  const thumbnailAsset = thumbnailImage as Asset;
-
-  return {
-    name,
-    description,
-    tagline,
-    githubUrl,
-    deployUrl,
-    thumbnailImage: thumbnailAsset.fields?.file?.url,
-    projectImages,
-    slug,
-  };
-});
+const projects = await getSideProjects();
 ---
 
-<Layout title="Side Projects — João Pedro">
+<Layout
+  title="Side Projects — João Pedro"
+  description="Things I built outside of work, for the fun of building them."
+>
   <main
-    class="mx-auto mt-12 mb-24 md:mt-24 flex w-full max-w-xl flex-col items-start gap-6 p-6 md:p-0"
+    id="main"
+    class="mx-auto flex w-full max-w-prose flex-col gap-12 px-6 py-16 md:py-24"
   >
-    <header class="flex flex-col gap-2 text-zinc-100 p-2">
-      <h1 class="font-serif text-2xl">Side Projects</h1>
-      <p class="text-stone-400">
-        Meet some of selected projects I've worked on.
-      </p>
-    </header>
-    <section class="flex flex-col gap-2 w-full">
-      {
-        projects.map((project) => {
-          return (
-            <a class="w-full" href={`/side-projects/${project.slug}`}>
-              <div class="flex p-2 space-x-2 hover:bg-stone-800 rounded-lg w-full transition-colors duration-300 justify-between">
-                <div class="flex flex-col gap-px items-start">
-                  <h2 class="font-serif text-lg text-zinc-200">
-                    {project.name}
-                  </h2>
-                  <p class="text-sm text-stone-500 italic">{project.tagline}</p>
-                </div>
-                <Image
-                  class="rounded-[4px]"
-                  src={`https:${project.thumbnailImage}`}
-                  alt="Logo"
-                  width="120"
-                  height="80"
-                />
-              </div>
-            </a>
-          );
-        })
-      }
-    </section>
+    <PageHeader
+      eyebrow="side projects"
+      title="Side Projects"
+      lede="Things I built outside of work, mostly to answer a question I had."
+      meta={`${projects.length} ${projects.length === 1 ? "project" : "projects"}`}
+    />
+
+    <EntryList
+      empty="Nothing shipped here yet."
+      entries={projects.map((project) => ({
+        href: `/side-projects/${project.id}`,
+        title: project.data.name,
+        meta: project.data.year ? String(project.data.year) : undefined,
+        note: project.data.tagline,
+      }))}
+    />
   </main>
 </Layout>

@@ -1,0 +1,58 @@
+---
+import EntryList from "../../components/EntryList.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getWriting, isoDate } from "../../lib/content";
+
+const posts = await getWriting();
+
+/** Group by year so the archive reads like a log, newest year first. */
+const byYear = posts.reduce<Record<string, typeof posts>>((acc, post) => {
+  const year = String(post.data.pubDate.getUTCFullYear());
+  (acc[year] ??= []).push(post);
+  return acc;
+}, {});
+
+const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
+---
+
+<Layout
+  title="Writing — João Pedro"
+  description="Notes, essays and half-formed thoughts on software and everything around it."
+>
+  <main
+    id="main"
+    class="mx-auto flex w-full max-w-prose flex-col gap-12 px-6 py-16 md:py-24"
+  >
+    <PageHeader
+      eyebrow="writing"
+      title="Writing"
+      lede="Notes, essays and half-formed thoughts. Mostly about software, sometimes not."
+      meta={`${posts.length} ${posts.length === 1 ? "post" : "posts"}`}
+    />
+
+    {
+      years.length === 0 ? (
+        <p class="font-mono text-sm text-ink-600">
+          First post is still cooking.
+        </p>
+      ) : (
+        years.map((year) => (
+          <section class="flex flex-col gap-3">
+            <h2 class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-600">
+              {year}
+            </h2>
+            <EntryList
+              entries={byYear[year].map((post) => ({
+                href: `/writing/${post.id}`,
+                title: post.data.title,
+                meta: isoDate(post.data.pubDate),
+                note: post.data.description,
+              }))}
+            />
+          </section>
+        ))
+      )
+    }
+  </main>
+</Layout>

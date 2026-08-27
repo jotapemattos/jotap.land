@@ -1,93 +1,108 @@
 ---
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
-import { Image } from "astro:assets";
-import type { Asset } from "contentful";
-import { contentfulClient } from "../../lib/contentful/client";
-import type { ProjectEntry } from "../../lib/contentful/types.ts";
+import { render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import Frame from "../../components/Frame.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Prose from "../../components/Prose.astro";
 import Layout from "../../layouts/Layout.astro";
-import { FolderIcon, GlobeAltIcon } from "@heroicons/react/24/outline";
+import {
+  getSideProjects,
+  hostOf,
+  type SideProjectEntry,
+} from "../../lib/content";
 
-export async function getStaticPaths() {
-  const { items } = await contentfulClient.getEntries<ProjectEntry>({
-    content_type: "project",
-  });
-  const pages = items.map((item) => ({
-    params: { slug: item.fields.slug },
-    props: {
-      name: item.fields.name,
-      description: item.fields.description,
-      projectImages: item.fields.projectImages,
-      deployUrl: item.fields.deployUrl,
-      githubUrl: item.fields.githubUrl,
-      stack: documentToHtmlString(item.fields.stack),
-    },
-  }));
-  return pages;
+interface Props {
+  project: SideProjectEntry;
 }
 
-const { name, description, projectImages, deployUrl, githubUrl, stack } =
-  Astro.props;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const projects = await getSideProjects();
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+};
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const { name, tagline, description, year, status, stack, repoUrl, liveUrl } =
+  project.data;
+
+const meta = [year, status !== "live" ? status : null]
+  .filter(Boolean)
+  .join(" · ");
 ---
 
-<Layout title={`${name} — João Pedro`}>
+<Layout title={`${name} — João Pedro`} description={description ?? tagline}>
   <main
-    class="mx-auto mt-24 flex w-full mb-32 max-w-3xl flex-col items-start gap-12 p-6 lg:p-0"
+    id="main"
+    class="mx-auto flex w-full max-w-prose flex-col gap-10 px-6 py-16 md:py-24"
   >
-    <header class="flex flex-col max-w-lg mx-auto w-full gap-2 text-zinc-100">
-      <h1 class="font-serif text-2xl">{name}</h1>
-      <p class="text-stone-400 text-sm">
-        {description}
-      </p>
-    </header>
-    <div class="flex flex-col gap-6 w-full">
-      {
-        projectImages.map((image) => {
-          const imageUrl = (image as Asset).fields?.file?.url;
-          return (
-            <Image
-              class="w-full rounded-lg"
-              src={`https:${imageUrl}`}
-              alt="Logo"
-              width="1000"
-              height="500"
-            />
-          );
-        })
-      }
-    </div>
-    <section class="w-full max-w-lg flex flex-col gap-4 mx-auto">
-      <hr class="w-full border-b-px border-stone-600 border-dashed" />
-      <div class="space-y-2">
-        <h3 class="font-serif text-stone-400 text-sm">Stack</h3>
-        <article class="text-zinc-100 text-sm" set:html={stack} />
-      </div>
-      <hr class="w-full border-b-px border-stone-600 border-dashed" />
-      <div class="w-full flex items-center gap-4">
-        {
-          deployUrl ? (
-            <a
-              href={`https://${deployUrl}`}
-              target="_blank"
-              class="w-fit flex items-center gap-2 text-neutral-300 bg-stone-950 rounded-full px-2 py-1"
-            >
-              <GlobeAltIcon className="size-5 text-neutral-300" />
-              <span class="text-sm">{deployUrl}</span>
-            </a>
-          ) : null
-        }
-        {
-          githubUrl ? (
-            <a
-              href={githubUrl}
-              target="_blank"
-              class="w-fit flex items-center gap-2 text-neutral-300 bg-stone-950 rounded-full px-2 py-1"
-            >
-              <FolderIcon className="size-5 text-neutral-300" />
-              <span class="text-sm">saborcomamor.vercel.app</span>
-            </a>
-          ) : null
-        }
-      </div>
-    </section>
+    <a class="link w-fit font-mono text-xs text-ink-600" href="/side-projects">
+      ← side projects
+    </a>
+
+    <PageHeader title={name} lede={description ?? tagline} meta={meta} />
+
+    {
+      (stack.length > 0 || repoUrl || liveUrl) && (
+        <Frame label="details" class="flex flex-col gap-5 px-5 py-8 md:px-8">
+          {stack.length > 0 && (
+            <div class="flex flex-col gap-2">
+              <h2 class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-600">
+                Stack
+              </h2>
+              <ul class="flex flex-wrap gap-2">
+                {stack.map((item) => (
+                  <li class="rounded-md border border-dashed border-ink/15 bg-paper-raised/60 px-2 py-0.5 font-mono text-[11px] text-ink-800">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {(repoUrl || liveUrl) && (
+            <div class="flex flex-col gap-2">
+              <h2 class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-600">
+                Links
+              </h2>
+              <ul class="flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs">
+                {liveUrl && (
+                  <li>
+                    <a
+                      class="link text-ink-800"
+                      href={liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      ↗ {hostOf(liveUrl)}
+                    </a>
+                  </li>
+                )}
+                {repoUrl && (
+                  <li>
+                    <a
+                      class="link text-ink-800"
+                      href={repoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      ↗ source
+                    </a>
+                  </li>
+                )}
+              </ul>
+            </div>
+          )}
+        </Frame>
+      )
+    }
+
+    <article class="rise">
+      <Prose>
+        <Content />
+      </Prose>
+    </article>
   </main>
 </Layout>

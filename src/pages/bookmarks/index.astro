@@ -1,0 +1,117 @@
+---
+import EntryList from "../../components/EntryList.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getBookmarks, hostOf } from "../../lib/content";
+import bookmarksFile from "../../content/bookmarks/bookmarks.json";
+
+const bookmarks = await getBookmarks();
+
+/** Grouped by month — a reading log reads better than a flat wall of links. */
+const byMonth = bookmarks.reduce<Record<string, typeof bookmarks>>(
+  (acc, bookmark) => {
+    const key = bookmark.data.savedAt.toISOString().slice(0, 7);
+    (acc[key] ??= []).push(bookmark);
+    return acc;
+  },
+  {},
+);
+
+const months = Object.keys(byMonth).sort().reverse();
+
+const monthLabel = (key: string) =>
+  new Date(`${key}-01T00:00:00Z`).toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+
+const tags = [...new Set(bookmarks.flatMap((b) => b.data.tags))].sort();
+
+const lastUpdate = bookmarksFile.lastUpdate
+  ? new Date(bookmarksFile.lastUpdate).toISOString().slice(0, 10)
+  : null;
+---
+
+<Layout
+  title="Bookmarks — João Pedro"
+  description="Everything worth keeping: articles, talks and repos I've saved."
+>
+  <main
+    id="main"
+    class="mx-auto flex w-full max-w-prose flex-col gap-12 px-6 py-16 md:py-24"
+  >
+    <PageHeader
+      eyebrow="bookmarks"
+      title="Bookmarks"
+      lede="Articles, talks and repos worth keeping. Saved as I read them, dumped here verbatim."
+      meta={[
+        `${bookmarks.length} saved`,
+        lastUpdate ? `last update ${lastUpdate}` : null,
+      ]
+        .filter(Boolean)
+        .join(" · ")}
+    />
+
+    {
+      tags.length > 0 && (
+        <ul class="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <li>
+              <a
+                class="tag rounded-md border border-dashed border-ink/15 bg-paper-raised/60 px-2 py-0.5 font-mono text-[11px] text-ink-600"
+                href={`/bookmarks/tags/${tag}`}
+              >
+                #{tag}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    {
+      months.length === 0 ? (
+        <p class="font-mono text-sm text-ink-600">No bookmarks saved yet.</p>
+      ) : (
+        months.map((month) => (
+          <section class="flex flex-col gap-3">
+            <h2 class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-600">
+              {monthLabel(month)}
+            </h2>
+            <EntryList
+              entries={byMonth[month].map((bookmark) => ({
+                href: bookmark.data.url,
+                title: bookmark.data.title,
+                meta: hostOf(bookmark.data.url),
+                note: bookmark.data.description ?? undefined,
+                external: true,
+              }))}
+            />
+          </section>
+        ))
+      )
+    }
+  </main>
+</Layout>
+
+<style>
+  .tag {
+    display: inline-block;
+    transition:
+      color 200ms ease,
+      border-color 200ms ease,
+      transform 160ms var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .tag:hover {
+      color: var(--accent-text);
+      border-color: rgb(52 168 147 / 0.5);
+    }
+  }
+
+  .tag:active {
+    transform: scale(0.97);
+  }
+</style>

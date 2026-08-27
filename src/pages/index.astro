@@ -1,113 +1,141 @@
 ---
-import Image from "astro/components/Image.astro";
-import { Button } from "../components/ui/button";
+import EntryList from "../components/EntryList.astro";
+import Frame from "../components/Frame.astro";
 import Layout from "../layouts/Layout.astro";
+import {
+  getBookmarks,
+  getSideProjects,
+  getWriting,
+  hostOf,
+  isoDate,
+} from "../lib/content";
+
+const [writing, projects, bookmarks] = await Promise.all([
+  getWriting(),
+  getSideProjects(),
+  getBookmarks(),
+]);
 ---
 
-<Layout title="Home — João Pedro">
+<Layout title="João Pedro — software engineer">
   <main
-    class="mx-auto mt-12 md:mt-24 mb-24 flex w-full max-w-screen-sm flex-col items-start gap-10 p-6 md:p-0"
+    id="main"
+    class="mx-auto flex w-full max-w-prose flex-col gap-20 px-6 py-16 md:py-24"
   >
-    <section
-      class="flex flex-wrap items-center justify-start gap-x-8 font-serif text-3xl max-sm:text-xl"
-    >
-      <div class="flex w-full flex-col items-start gap-y-10">
-        <Image src="/stone-300-logo.png" alt="Logo" width="40" height="40" />
-        <h1 class="flex w-full flex-wrap gap-x-2 text-white">
-          Yo, João Pedro here
-        </h1>
-      </div>
-      <div class="flex w-full flex-wrap gap-x-2 text-stone-400">
-        I'm a software engineer based in Brazil
-      </div>
+    <section class="flex flex-col gap-6 rise">
+      <p
+        class="font-mono text-[11px] uppercase tracking-[0.2em] text-accent-600"
+      >
+        [&nbsp;jotap.land&nbsp;]
+      </p>
+      <h1 class="font-serif text-4xl leading-[1.1] text-ink md:text-5xl">
+        Yo, João Pedro here
+      </h1>
+      <p
+        class="max-w-[58ch] text-sm leading-relaxed text-ink-700 md:text-[15px]"
+      >
+        I'm a software engineer based in Brazil. This is where I keep the things
+        I make, the things I'm figuring out, and the things worth linking to.
+      </p>
     </section>
-    <section
-      class="flex flex-col gap-y-6 font-sans leading-loose text-stone-400 [&>p]:font-light"
+
+    <Frame
+      label="now"
+      class="px-5 py-8 md:px-8 rise"
+      style="animation-delay: 60ms"
     >
-      <h2 class="font-serif text-zinc-50 max-sm:text-base md:text-xl">
-        Here is a brief introduction to what this is
-      </h2>
       <div
-        class="space-y-4 text-sm transition-colors duration-300 md:text-base [&>p>em]:text-zinc-50"
+        class="flex flex-col gap-4 text-sm leading-relaxed text-ink-700 md:text-[15px]"
       >
         <p>
-          Recently I felt the <em>need to journal my life</em> — we only live once,
-          after all — so I decided to combine it with my software engineering skills
-          and <em>build a space</em> where I could share my experiences. This is
-          more than just a portfolio. While I'll certainly share <em
-            >work-related content, case studies</em
-          > and <em>side projects </em> here, I'm really looking forward to posting
-          some<em> personal thoughts</em> as well.
-        </p>
-      </div>
-    </section>
-    <section
-      class="flex flex-col gap-y-6 font-sans leading-loose text-stone-400 [&>p]:font-light"
-    >
-      <h2 class="font-serif text-zinc-50 max-sm:text-base md:text-xl">Now</h2>
-      <div
-        class="space-y-4 text-sm transition-colors duration-300 md:text-base [&>p>em]:text-zinc-50"
-      >
-        <p>
-          Currently I'm at <a
+          Currently at <a
+            class="link-inline"
             href="https://www.intranetmall.com.br/br/"
             target="_blank"
-            class="group inline-flex items-center gap-x-1 transition-all duration-200 hover:text-stone-200 hover:underline"
-            rel="noopener noreferrer"
-          >
-            IntranetMall
-          </a> as a <em>Software Engineer</em>, working to turn complex ideas
-          into
-          <em>polished digital experiences</em>. My main focus right now is backend development and system design. I am deeply diving into how to build scalable and robust systems.
+            rel="noopener noreferrer">IntranetMall</a
+          > as a <em class="not-italic text-ink">Software Engineer</em>, turning
+          complex ideas into polished digital experiences. My focus right now is
+          backend development and system design — how to build things that stay
+          scalable and robust as they grow.
         </p>
         <p>
-          Beyond work, what truly fires me up at the moment is photography, <a
-            class="transition-colors duration-300 hover:text-white"
+          Outside of work: photography, <a
+            class="link-inline"
             href="https://letterboxd.com/jotapzn/"
-            target="_blank">diving into movies</a
+            target="_blank"
+            rel="noopener noreferrer">movies</a
           >, <a
-            class="transition-colors duration-300 hover:text-white"
+            class="link-inline"
             href="https://open.spotify.com/user/yw78qs7x7uerkgmw6ngpsd75n"
-            target="_blank">listening to good music</a
-          > and experimenting with new recipes.
+            target="_blank"
+            rel="noopener noreferrer">good music</a
+          >, and new recipes.
         </p>
       </div>
+    </Frame>
+
+    <section class="flex flex-col gap-5 rise" style="animation-delay: 100ms">
+      <div class="flex items-baseline justify-between gap-4">
+        <h2
+          class="font-mono text-[11px] uppercase tracking-[0.2em] text-accent-600"
+        >
+          [&nbsp;writing&nbsp;]
+        </h2>
+        <a class="link font-mono text-xs text-ink-600" href="/writing">
+          all posts →
+        </a>
+      </div>
+      <EntryList
+        empty="First post is still cooking."
+        entries={writing.slice(0, 5).map((post) => ({
+          href: `/writing/${post.id}`,
+          title: post.data.title,
+          meta: isoDate(post.data.pubDate),
+        }))}
+      />
     </section>
-    <section class="mx-auto flex w-full items-center gap-2">
-      <Button
-        href="https://x.com/devjotape"
-        title="Twitter"
-        as="a"
-        variant="link"
-        className="p-0"
-        external
+
+    <section class="flex flex-col gap-5 rise" style="animation-delay: 140ms">
+      <div class="flex items-baseline justify-between gap-4">
+        <h2
+          class="font-mono text-[11px] uppercase tracking-[0.2em] text-accent-600"
+        >
+          [&nbsp;side projects&nbsp;]
+        </h2>
+        <a class="link font-mono text-xs text-ink-600" href="/side-projects">
+          all projects →
+        </a>
+      </div>
+      <EntryList
+        empty="Nothing shipped here yet."
+        entries={projects.slice(0, 4).map((project) => ({
+          href: `/side-projects/${project.id}`,
+          title: project.data.name,
+          meta: project.data.year ? String(project.data.year) : undefined,
+          note: project.data.tagline,
+        }))}
       />
-      <span class="size-0.5 rounded-full bg-stone-100"></span>
-      <Button
-        href="https://www.linkedin.com/in/jo%C3%A3o-pedro-mattos-rodrigues-camargo/"
-        title="LinkedIn"
-        as="a"
-        variant="link"
-        className="p-0"
-        external
-      />
-      <span class="size-0.5 rounded-full bg-stone-100"></span>
-      <Button
-        href="https://github.com/jotapemattos"
-        title="GitHub"
-        as="a"
-        variant="link"
-        className="p-0"
-        external
-      />
-      <span class="size-0.5 rounded-full bg-stone-100"></span>
-      <Button
-        href="mailto:jotapemattos.dev@gmail.com"
-        title="Email"
-        as="a"
-        variant="link"
-        className="p-0"
-        external
+    </section>
+
+    <section class="flex flex-col gap-5 rise" style="animation-delay: 180ms">
+      <div class="flex items-baseline justify-between gap-4">
+        <h2
+          class="font-mono text-[11px] uppercase tracking-[0.2em] text-accent-600"
+        >
+          [&nbsp;bookmarks&nbsp;]
+        </h2>
+        <a class="link font-mono text-xs text-ink-600" href="/bookmarks">
+          all bookmarks →
+        </a>
+      </div>
+      <EntryList
+        empty="No bookmarks saved yet."
+        entries={bookmarks.slice(0, 5).map((bookmark) => ({
+          href: bookmark.data.url,
+          title: bookmark.data.title,
+          meta: hostOf(bookmark.data.url),
+          external: true,
+        }))}
       />
     </section>
   </main>

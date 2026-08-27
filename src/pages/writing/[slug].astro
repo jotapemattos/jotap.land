@@ -1,0 +1,60 @@
+---
+import { render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Prose from "../../components/Prose.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getWriting, longDate, type WritingEntry } from "../../lib/content";
+
+interface Props {
+  post: WritingEntry;
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await getWriting();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+};
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout
+  title={`${post.data.title} — João Pedro`}
+  description={post.data.description}
+>
+  <main
+    id="main"
+    class="mx-auto flex w-full max-w-prose flex-col gap-10 px-6 py-16 md:py-24"
+  >
+    <a class="link w-fit font-mono text-xs text-ink-600" href="/writing">
+      ← writing
+    </a>
+
+    <PageHeader
+      title={post.data.title}
+      lede={post.data.description}
+      meta={longDate(post.data.pubDate)}
+    />
+
+    {
+      post.data.tags.length > 0 && (
+        <ul class="flex flex-wrap gap-2">
+          {post.data.tags.map((tag) => (
+            <li class="rounded-md border border-dashed border-ink/15 bg-paper-raised/60 px-2 py-0.5 font-mono text-[11px] text-ink-600">
+              {tag}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <hr />
+
+    <article class="rise">
+      <Prose>
+        <Content />
+      </Prose>
+    </article>
+  </main>
+</Layout>
