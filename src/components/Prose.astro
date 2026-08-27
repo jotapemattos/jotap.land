@@ -1,0 +1,160 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+
+<div class:list={["prose-jp", className]}>
+  <slot />
+</div>
+
+<style is:global>
+  .prose-jp {
+    font-size: 14px;
+    line-height: 1.85;
+    color: rgb(26 22 19 / 0.78);
+  }
+
+  @media (min-width: 768px) {
+    .prose-jp {
+      font-size: 15px;
+    }
+  }
+
+  .prose-jp > * + * {
+    margin-top: 1.15em;
+  }
+
+  .prose-jp h2,
+  .prose-jp h3,
+  .prose-jp h4 {
+    color: var(--fg);
+    font-family: "Instrument Serif", Georgia, serif;
+    line-height: 1.25;
+    margin-top: 2.4em;
+    margin-bottom: 0.6em;
+    scroll-margin-top: 2rem;
+  }
+
+  .prose-jp h2 {
+    font-size: 1.55em;
+  }
+  .prose-jp h3 {
+    font-size: 1.3em;
+  }
+  .prose-jp h4 {
+    font-size: 1.1em;
+  }
+
+  .prose-jp strong,
+  .prose-jp em {
+    color: var(--fg);
+  }
+
+  .prose-jp a {
+    color: var(--fg);
+    text-decoration: underline;
+    text-decoration-color: rgb(26 22 19 / 0.35);
+    text-underline-offset: 3px;
+    transition:
+      color 200ms ease,
+      text-decoration-color 200ms ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .prose-jp a:hover {
+      color: var(--accent-text);
+      text-decoration-color: var(--accent-text);
+    }
+  }
+
+  .prose-jp ul,
+  .prose-jp ol {
+    padding-left: 1.4em;
+  }
+
+  .prose-jp ul {
+    list-style: none;
+  }
+
+  .prose-jp ul > li::before {
+    content: "—";
+    color: var(--accent);
+    position: absolute;
+    margin-left: -1.4em;
+  }
+
+  .prose-jp ol {
+    list-style: decimal;
+  }
+
+  .prose-jp li {
+    position: relative;
+    margin-top: 0.35em;
+  }
+
+  .prose-jp blockquote {
+    border-left: 1px dashed var(--rule);
+    padding-left: 1.2em;
+    color: rgb(26 22 19 / 0.6);
+    font-style: italic;
+  }
+
+  .prose-jp code {
+    font-family:
+      "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.88em;
+    color: var(--accent-text);
+    background-color: rgb(26 22 19 / 0.05);
+    padding: 0.12em 0.4em;
+    border-radius: 4px;
+  }
+
+  .prose-jp pre {
+    background-color: var(--surface);
+    border: 1px dashed var(--rule);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    overflow-x: auto;
+    font-size: 0.85em;
+    line-height: 1.7;
+  }
+
+  .prose-jp pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    font-size: 1em;
+  }
+
+  .prose-jp img,
+  .prose-jp video {
+    border-radius: 12px;
+    border: 1px solid rgb(26 22 19 / 0.1);
+    width: 100%;
+    height: auto;
+  }
+
+  .prose-jp hr {
+    margin-block: 2.4em;
+  }
+
+  .prose-jp table {
+    width: 100%;
+    font-size: 0.92em;
+    border-collapse: collapse;
+  }
+
+  .prose-jp th,
+  .prose-jp td {
+    border-bottom: 1px dashed var(--rule);
+    padding: 0.5em 0.6em;
+    text-align: left;
+  }
+
+  .prose-jp th {
+    color: var(--fg);
+    font-weight: 500;
+  }
+</style>

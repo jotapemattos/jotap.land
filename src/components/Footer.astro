@@ -1,0 +1,41 @@
+---
+const LINKS = [
+  { href: "https://x.com/devjotape", label: "twitter" },
+  {
+    href: "https://www.linkedin.com/in/jo%C3%A3o-pedro-mattos-rodrigues-camargo/",
+    label: "linkedin",
+  },
+  { href: "https://github.com/jotapemattos", label: "github" },
+  { href: "mailto:jotapemattos.dev@gmail.com", label: "email" },
+  { href: "/resume.pdf", label: "resume" },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer class="mx-auto w-full max-w-prose px-6 pb-16 pt-20 md:pb-24">
+  <hr class="mb-6" />
+  <div
+    class="flex flex-wrap items-center justify-between gap-4 font-mono text-xs text-ink-600"
+  >
+    <ul class="flex flex-wrap items-center gap-x-4 gap-y-2">
+      {
+        LINKS.map((link) => (
+          <li>
+            <a
+              class="link text-ink-700"
+              href={link.href}
+              rel={
+                link.href.startsWith("http") ? "noopener noreferrer" : undefined
+              }
+              target={link.href.startsWith("/") ? undefined : "_blank"}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p>© {year} João Pedro</p>
+  </div>
+</footer>

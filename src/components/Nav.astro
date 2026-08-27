@@ -1,0 +1,63 @@
+---
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const LINKS = [
+  { href: "/", label: "about" },
+  { href: "/writing", label: "writing" },
+  { href: "/side-projects", label: "side-projects" },
+  { href: "/study-cases", label: "study-cases" },
+  { href: "/bookmarks", label: "bookmarks" },
+];
+
+const isActive = (href: string) =>
+  href === "/" ? path === "/" : path.startsWith(href);
+---
+
+<nav
+  aria-label="Primary"
+  class="mx-auto w-full max-w-prose px-6 pt-8 md:pt-12"
+  transition:persist
+>
+  <ul
+    class="flex flex-wrap items-center gap-x-1 gap-y-2 font-mono text-[13px] md:text-sm"
+  >
+    {
+      LINKS.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            aria-current={isActive(link.href) ? "page" : undefined}
+            class:list={[
+              "nav-item rounded-md px-2 py-1",
+              isActive(link.href) ? "text-accent-600" : "text-ink-700",
+            ]}
+          >
+            <span class="opacity-40">/</span>
+            {link.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .nav-item {
+    /* transform is what makes the press feel heard; keep it off `all`. */
+    transition:
+      color 200ms ease,
+      background-color 200ms ease,
+      transform 160ms var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .nav-item:hover {
+      color: var(--fg);
+      background-color: rgb(243 234 223 / 0.8);
+    }
+  }
+
+  .nav-item:active {
+    transform: scale(0.97);
+  }
+</style>
