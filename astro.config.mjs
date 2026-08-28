@@ -1,12 +1,14 @@
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
   site: "https://jotap.land",
-  integrations: [tailwind()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
   markdown: {
     shikiConfig: {
-      theme: "vitesse-dark",
+      theme: "vitesse-light",
       wrap: true,
     },
   },

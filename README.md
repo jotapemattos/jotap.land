@@ -4,8 +4,9 @@ My corner of the web. Astro, statically generated, deployed on Cloudflare.
 
 ## Stack
 
-- **Astro 5** — static output, zero client JS except view transitions
-- **Tailwind CSS** — design tokens live in `tailwind.config.mjs`
+- **Astro 7** — static output, zero client JS except view transitions
+- **Tailwind CSS 4** — CSS-first; design tokens live in the `@theme` block
+  at the top of `src/styles/globals.css`
 - **Content collections** — everything publishable is a file in `src/content/`
 
 ## Adding content

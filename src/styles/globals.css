@@ -1,6 +1,47 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/**
+ * Design tokens. In Tailwind 4 these live in CSS, so `--color-ink-700` is both
+ * the `text-ink-700` utility and a plain var you can reach for in raw CSS.
+ */
+@theme {
+  /* Ground — floralwhite paper, with the cream as the raised surface. */
+  --color-paper: #fffaf0;
+  --color-paper-raised: #f3eadf;
+  --color-paper-sunken: #ece0d1;
+
+  /* Primary ink. 400–800 are the ink blended up over the paper, so the whole
+     ladder stays warm-neutral instead of going cold grey. */
+  --color-ink: #1a1613;
+  --color-ink-900: #1a1613;
+  --color-ink-800: #3c3834;
+  --color-ink-700: #5a5651;
+  --color-ink-600: #817d76;
+  --color-ink-500: #a39f98;
+  --color-ink-400: #c2bfb9;
+
+  /* Secondary. The pure brand tone is for marks and rules; on paper it only
+     clears 2.5:1, so small text uses 600/700 instead. */
+  --color-accent: #34a893;
+  --color-accent-50: #eafaf6;
+  --color-accent-100: #c4f0e6;
+  --color-accent-200: #8fe1d0;
+  --color-accent-300: #5cccb6;
+  --color-accent-400: #34a893;
+  --color-accent-500: #2b8b7a;
+  --color-accent-600: #236f62;
+  --color-accent-700: #1c574d;
+  --color-accent-800: #16443c;
+  --color-accent-900: #0f302b;
+
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-serif: "Instrument Serif", Georgia, serif;
+
+  /* The built-in curves are too weak; these have the punch UI motion needs. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
 
 @layer base {
   @font-face {
@@ -19,10 +60,6 @@
     /* The brand tone only clears 2.5:1 on paper — small text uses this. */
     --accent-text: #236f62;
     --rule: rgb(26 22 19 / 0.18);
-
-    /* Emil's curves — the built-in ones are too weak. */
-    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 
     color-scheme: light;
     accent-color: var(--accent);
@@ -132,16 +169,6 @@
     );
     background-size: 8px 1px;
     background-repeat: repeat-x;
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .text-pretty {
-    text-wrap: pretty;
   }
 }
 
