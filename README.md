@@ -26,6 +26,13 @@ Drafts (`draft: true`) render in `dev` and are excluded from the build.
 
 Type is monospace (JetBrains Mono) with Instrument Serif for display headings.
 
+## Toolchain
+
+Node and pnpm are pinned — `.node-version` for Node, `packageManager` in
+`package.json` for pnpm. Cloudflare reads both, so CI and local run the same
+versions and the lockfile is actually honoured. Use `corepack pnpm …` (or just
+`pnpm`, if corepack is enabled) so the pin takes effect.
+
 ## Commands
 
 ```sh
