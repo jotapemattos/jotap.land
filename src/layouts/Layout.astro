@@ -60,5 +60,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
     <Nav />
     <slot />
     <Footer />
+
+    <script is:inline>
+      /* First paint gets the staggered rise. A client-side navigation already
+         has the view transition's cross-fade, so replaying a translate on
+         every element on top of it just reads as the page jumping. */
+      document.addEventListener("astro:before-swap", () => {
+        document.documentElement.dataset.swapped = "";
+      });
+    </script>
   </body>
 </html>

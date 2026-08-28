@@ -68,6 +68,9 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    /* Reserve the scrollbar's width on every page, so navigating from a short
+       page to a long one doesn't shift the whole layout sideways. */
+    scrollbar-gutter: stable;
   }
 
   body {
@@ -188,6 +191,21 @@
 
 .rise {
   animation: rise 420ms var(--ease-out) both;
+}
+
+/* After the first client-side navigation, keep the fade and drop the travel —
+   the view transition is already moving the page. */
+@keyframes settle {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+html[data-swapped] .rise {
+  animation: settle 260ms var(--ease-out) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
