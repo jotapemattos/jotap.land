@@ -5,8 +5,8 @@
  * the `text-ink-700` utility and a plain var you can reach for in raw CSS.
  */
 @theme {
-  /* Ground — floralwhite paper, with the cream as the raised surface. */
-  --color-paper: #fffaf0;
+  /* Ground — plain white, with the cream as the raised surface. */
+  --color-paper: #ffffff;
   --color-paper-raised: #f3eadf;
   --color-paper-sunken: #ece0d1;
 
@@ -20,8 +20,8 @@
   --color-ink-500: #a39f98;
   --color-ink-400: #c2bfb9;
 
-  /* Secondary. The pure brand tone is for marks and rules; on paper it only
-     clears 2.5:1, so small text uses 600/700 instead. */
+  /* Secondary. The pure brand tone is for marks and rules; on white it only
+     clears 2.6:1, so small text uses 600/700 instead. */
   --color-accent: #34a893;
   --color-accent-50: #eafaf6;
   --color-accent-100: #c4f0e6;
@@ -53,11 +53,11 @@
   }
 
   :root {
-    --bg: #fffaf0;
+    --bg: #ffffff;
     --surface: #f3eadf;
     --fg: #1a1613;
     --accent: #34a893;
-    /* The brand tone only clears 2.5:1 on paper — small text uses this. */
+    /* The brand tone only clears 2.6:1 on white — small text uses this. */
     --accent-text: #236f62;
     --rule: rgb(26 22 19 / 0.18);
 
