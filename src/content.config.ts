@@ -1,4 +1,5 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "zod";
 import { file, glob } from "astro/loaders";
 
 /**
@@ -42,8 +43,8 @@ const sideProjects = defineCollection({
     year: z.number().optional(),
     status: z.enum(["live", "archived", "wip"]).default("live"),
     stack: z.array(z.string()).default([]),
-    repoUrl: z.string().url().optional(),
-    liveUrl: z.string().url().optional(),
+    repoUrl: z.url().optional(),
+    liveUrl: z.url().optional(),
     draft: z.boolean().default(false),
   }),
 });
@@ -72,7 +73,7 @@ const bookmarks = defineCollection({
   schema: z.object({
     id: z.string(),
     title: z.string(),
-    url: z.string().url(),
+    url: z.url(),
     savedAt: z.coerce.date(),
     description: z.string().nullable().optional(),
     tags: z.array(z.string()).default([]),
