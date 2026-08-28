@@ -15,7 +15,6 @@ const isActive = (href: string) =>
 <nav
   aria-label="Primary"
   class="mx-auto w-full max-w-[68ch] px-6 pt-8 md:pt-12"
-  transition:persist
 >
   <ul
     class="flex flex-wrap items-center gap-x-1 gap-y-2 font-mono text-[13px] md:text-sm"
@@ -28,7 +27,7 @@ const isActive = (href: string) =>
             aria-current={isActive(link.href) ? "page" : undefined}
             class:list={[
               "nav-item rounded-md px-2 py-1",
-              isActive(link.href) ? "text-accent-600" : "text-ink-700",
+              isActive(link.href) ? "is-active" : "text-ink-700",
             ]}
           >
             <span class="opacity-40">/</span>
@@ -41,6 +40,13 @@ const isActive = (href: string) =>
 </nav>
 
 <style>
+  /* "You are here": the raised surface does the work, so the current page is
+     legible even where the accent hue is hard to read. */
+  .nav-item.is-active {
+    color: var(--accent-text);
+    background-color: var(--surface);
+  }
+
   .nav-item {
     /* transform is what makes the press feel heard; keep it off `all`. */
     transition:
