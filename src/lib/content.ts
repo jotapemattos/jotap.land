@@ -10,14 +10,9 @@ export async function getWriting() {
   return posts.sort((a, b) => byDateDesc(a.data.pubDate, b.data.pubDate));
 }
 
-export async function getSideProjects() {
-  const projects = await getCollection("sideProjects", isPublished);
-  return projects.sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0));
-}
-
-export async function getStudyCases() {
-  const cases = await getCollection("studyCases", isPublished);
-  return cases.sort((a, b) => byDateDesc(a.data.pubDate, b.data.pubDate));
+export async function getWork() {
+  const entries = await getCollection("work", isPublished);
+  return entries.sort((a, b) => byDateDesc(a.data.pubDate, b.data.pubDate));
 }
 
 export async function getBookmarks() {
@@ -26,8 +21,7 @@ export async function getBookmarks() {
 }
 
 export type WritingEntry = CollectionEntry<"writing">;
-export type SideProjectEntry = CollectionEntry<"sideProjects">;
-export type StudyCaseEntry = CollectionEntry<"studyCases">;
+export type WorkEntry = CollectionEntry<"work">;
 export type BookmarkEntry = CollectionEntry<"bookmarks">;
 
 /** 2026-08-27 — sorts and reads the same everywhere, no locale surprises. */

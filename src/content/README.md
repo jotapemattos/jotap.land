@@ -19,32 +19,24 @@ draft: false                 # drafts render in `dev` only
 ---
 ```
 
-## `side-projects/`
+## `work/`
+
+Side projects and study cases share one folder and one section — to a reader
+they are the same thing, something built and written up. A file lives at
+`/work/<filename>`.
 
 ```yaml
 ---
-name: "Project name"         # required
-tagline: "One line."         # required
-description: "Longer blurb." # optional
-year: 2026                   # optional — listings sort by it, newest first
-status: live                 # live | wip | archived
-stack: ["TypeScript"]        # optional
-repoUrl: "https://…"         # optional
-liveUrl: "https://…"         # optional
-draft: false
----
-```
-
-## `study-cases/`
-
-```yaml
----
-title: "Case title"          # required
-tagline: "One line."         # required
-description: "Longer blurb." # optional
-pubDate: 2026-08-27          # required
-role: "Software Engineer"    # optional
-tags: ["backend"]            # optional
+title: "Project or case title" # required
+tagline: "One line."           # required
+description: "Longer blurb."   # optional
+pubDate: 2026-08-27            # required — the listing sorts by it, newest first
+role: "Software Engineer"      # optional — reads as a case
+status: live                   # optional — live | wip | archived
+stack: ["TypeScript"]          # optional — renders the "details" frame
+tags: ["backend"]              # optional
+repoUrl: "https://…"           # optional
+liveUrl: "https://…"           # optional
 draft: false
 ---
 ```

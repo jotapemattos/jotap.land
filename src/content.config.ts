@@ -31,33 +31,24 @@ const writing = defineCollection({
   }),
 });
 
-const sideProjects = defineCollection({
-  loader: glob({
-    base: "./src/content/side-projects",
-    pattern: "**/*.{md,mdx}",
-  }),
-  schema: z.object({
-    name: z.string(),
-    tagline: z.string(),
-    description: z.string().optional(),
-    year: z.number().optional(),
-    status: z.enum(["live", "archived", "wip"]).default("live"),
-    stack: z.array(z.string()).default([]),
-    repoUrl: z.url().optional(),
-    liveUrl: z.url().optional(),
-    draft: z.boolean().default(false),
-  }),
-});
-
-const studyCases = defineCollection({
-  loader: glob({ base: "./src/content/study-cases", pattern: "**/*.{md,mdx}" }),
+/**
+ * `work/` is one collection on purpose: a side project and a study case are the
+ * same thing to a reader — something built, written up. The optional fields let
+ * a file lean either way without splitting the section in two.
+ */
+const work = defineCollection({
+  loader: glob({ base: "./src/content/work", pattern: "**/*.{md,mdx}" }),
   schema: z.object({
     title: z.string(),
     tagline: z.string(),
     description: z.string().optional(),
     pubDate: z.coerce.date(),
     role: z.string().optional(),
+    status: z.enum(["live", "archived", "wip"]).optional(),
+    stack: z.array(z.string()).default([]),
     tags: z.array(z.string()).default([]),
+    repoUrl: z.url().optional(),
+    liveUrl: z.url().optional(),
     draft: z.boolean().default(false),
   }),
 });
@@ -80,4 +71,4 @@ const bookmarks = defineCollection({
   }),
 });
 
-export const collections = { writing, sideProjects, studyCases, bookmarks };
+export const collections = { writing, work, bookmarks };

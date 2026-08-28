@@ -1,0 +1,35 @@
+---
+import EntryList from "../../components/EntryList.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getWork, isoDate } from "../../lib/content";
+
+const entries = await getWork();
+---
+
+<Layout
+  title="Work — João Pedro"
+  description="Things I built and wrote up: the problem, the constraints, and what I'd do differently."
+>
+  <main
+    id="main"
+    class="mx-auto flex w-full max-w-[68ch] flex-col gap-12 px-6 py-16 md:py-24"
+  >
+    <PageHeader
+      eyebrow="work"
+      title="Work"
+      lede="Things I built and wrote up — side projects and longer cases in one place: the problem, the constraints, the trade-offs, and what I'd do differently."
+      meta={`${entries.length} ${entries.length === 1 ? "entry" : "entries"}`}
+    />
+
+    <EntryList
+      empty="Nothing published here yet."
+      entries={entries.map((entry) => ({
+        href: `/work/${entry.id}`,
+        title: entry.data.title,
+        meta: isoDate(entry.data.pubDate),
+        note: entry.data.tagline,
+      }))}
+    />
+  </main>
+</Layout>

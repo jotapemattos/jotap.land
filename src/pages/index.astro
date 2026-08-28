@@ -4,15 +4,15 @@ import Frame from "../components/Frame.astro";
 import Layout from "../layouts/Layout.astro";
 import {
   getBookmarks,
-  getSideProjects,
+  getWork,
   getWriting,
   hostOf,
   isoDate,
 } from "../lib/content";
 
-const [writing, projects, bookmarks] = await Promise.all([
+const [writing, work, bookmarks] = await Promise.all([
   getWriting(),
-  getSideProjects(),
+  getWork(),
   getBookmarks(),
 ]);
 ---
@@ -100,19 +100,19 @@ const [writing, projects, bookmarks] = await Promise.all([
         <h2
           class="font-mono text-[11px] uppercase tracking-[0.2em] text-accent-600"
         >
-          [&nbsp;side projects&nbsp;]
+          [&nbsp;work&nbsp;]
         </h2>
-        <a class="link font-mono text-xs text-ink-600" href="/side-projects">
-          all projects →
+        <a class="link font-mono text-xs text-ink-600" href="/work">
+          all work →
         </a>
       </div>
       <EntryList
-        empty="Nothing shipped here yet."
-        entries={projects.slice(0, 4).map((project) => ({
-          href: `/side-projects/${project.id}`,
-          title: project.data.name,
-          meta: project.data.year ? String(project.data.year) : undefined,
-          note: project.data.tagline,
+        empty="Nothing published here yet."
+        entries={work.slice(0, 4).map((entry) => ({
+          href: `/work/${entry.id}`,
+          title: entry.data.title,
+          meta: isoDate(entry.data.pubDate),
+          note: entry.data.tagline,
         }))}
       />
     </section>

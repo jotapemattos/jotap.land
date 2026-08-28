@@ -147,7 +147,9 @@
     text-decoration: underline;
     text-decoration-color: rgb(26 22 19 / 0.35);
     text-underline-offset: 3px;
-    transition: color 200ms ease, text-decoration-color 200ms ease;
+    transition:
+      color 200ms ease,
+      text-decoration-color 200ms ease;
   }
 
   @media (hover: hover) and (pointer: fine) {
