@@ -1,29 +1,4 @@
 {
-  "lastUpdate": "2026-08-27T00:00:00.000Z",
-  "data": [
-    {
-      "id": "seed-01",
-      "title": "Designing Data-Intensive Applications",
-      "url": "https://dataintensive.net/",
-      "savedAt": "2026-08-20T12:00:00.000Z",
-      "description": "The book I keep coming back to whenever I have to reason about storage, replication or consistency.",
-      "tags": ["systems", "books"]
-    },
-    {
-      "id": "seed-02",
-      "title": "The Twelve-Factor App",
-      "url": "https://12factor.net/",
-      "savedAt": "2026-08-12T09:30:00.000Z",
-      "description": "Old, still right about most things.",
-      "tags": ["backend"]
-    },
-    {
-      "id": "seed-03",
-      "title": "animations.dev",
-      "url": "https://animations.dev/",
-      "savedAt": "2026-07-30T18:10:00.000Z",
-      "description": "Emil Kowalski on why good motion feels invisible.",
-      "tags": ["design"]
-    }
-  ]
+  "lastUpdate": "2026-08-29T00:00:00.000Z",
+  "data": []
 }
