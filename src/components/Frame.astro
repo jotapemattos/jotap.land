@@ -1,0 +1,56 @@
+---
+/**
+ * The dashed plate from the reference sheets: a hairline dashed box with `+`
+ * corner marks and a bracketed label notched into the top edge.
+ */
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"section"> & {
+  label?: string;
+  as?: "section" | "div" | "article" | "aside";
+};
+
+const {
+  label,
+  class: className = "",
+  as: Tag = "section",
+  ...rest
+} = Astro.props;
+---
+
+<Tag class:list={["frame relative", className]} {...rest}>
+  {
+    label && (
+      <span class="absolute -top-[0.7em] left-1/2 -translate-x-1/2 whitespace-nowrap bg-paper px-3 font-mono text-[11px] uppercase tracking-[0.2em] text-accent-600">
+        [&nbsp;{label}&nbsp;]
+      </span>
+    )
+  }
+
+  {/* Corner marks — pure decoration, hidden from the a11y tree. */}
+  <span aria-hidden="true" class="corner -left-[0.5ch] -top-[0.72em]">+</span>
+  <span aria-hidden="true" class="corner -right-[0.5ch] -top-[0.72em]">+</span>
+  <span aria-hidden="true" class="corner -bottom-[0.72em] -left-[0.5ch]">+</span
+  >
+  <span aria-hidden="true" class="corner -bottom-[0.72em] -right-[0.5ch]"
+    >+</span
+  >
+
+  <div class="frame-inner">
+    <slot />
+  </div>
+</Tag>
+
+<style>
+  .corner {
+    position: absolute;
+    background-color: var(--bg);
+    padding-inline: 0.15ch;
+    font-family:
+      "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    line-height: 1;
+    color: rgb(26 22 19 / 0.32);
+    user-select: none;
+  }
+</style>

@@ -1,18 +1,229 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-::selection {
-  @apply bg-stone-400/30 text-stone-50;
+/**
+ * Design tokens. In Tailwind 4 these live in CSS, so `--color-ink-700` is both
+ * the `text-ink-700` utility and a plain var you can reach for in raw CSS.
+ */
+@theme {
+  /* Ground — plain white, with the cream as the raised surface. */
+  --color-paper: #ffffff;
+  --color-paper-raised: #f3eadf;
+  --color-paper-sunken: #ece0d1;
+
+  /* Primary ink. 400–800 are the ink blended up over the paper, so the whole
+     ladder stays warm-neutral instead of going cold grey. */
+  --color-ink: #1a1613;
+  --color-ink-900: #1a1613;
+  --color-ink-800: #3c3834;
+  --color-ink-700: #5a5651;
+  --color-ink-600: #817d76;
+  --color-ink-500: #a39f98;
+  --color-ink-400: #c2bfb9;
+
+  /* Secondary. The pure brand tone is for marks and rules; on white it only
+     clears 2.6:1, so small text uses 600/700 instead. */
+  --color-accent: #34a893;
+  --color-accent-50: #eafaf6;
+  --color-accent-100: #c4f0e6;
+  --color-accent-200: #8fe1d0;
+  --color-accent-300: #5cccb6;
+  --color-accent-400: #34a893;
+  --color-accent-500: #2b8b7a;
+  --color-accent-600: #236f62;
+  --color-accent-700: #1c574d;
+  --color-accent-800: #16443c;
+  --color-accent-900: #0f302b;
+
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-serif: "Instrument Serif", Georgia, serif;
+
+  /* The built-in curves are too weak; these have the punch UI motion needs. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 @layer base {
   @font-face {
-    font-family: "Aeonik";
-    src: url(/fonts/Aeonik.otf) format("otf");
+    font-family: "Instrument Serif";
+    src: url("/fonts/InstrumentSerif.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
   }
-  @font-face {
-    font-family: "Zodiak";
-    src: url(/fonts/InstrumentSerif.ttf) format("ttf");
+
+  :root {
+    --bg: #ffffff;
+    --surface: #f3eadf;
+    --fg: #1a1613;
+    --accent: #34a893;
+    /* The brand tone only clears 2.6:1 on white — small text uses this. */
+    --accent-text: #236f62;
+    --rule: rgb(26 22 19 / 0.18);
+
+    color-scheme: light;
+    accent-color: var(--accent);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    /* Reserve the scrollbar's width on every page, so navigating from a short
+       page to a long one doesn't shift the whole layout sideways. */
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: rgb(52 168 147 / 0.25);
+    color: #1a1613;
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px dashed var(--rule);
+  }
+}
+
+@layer components {
+  /* ── The dashed frame from the reference sheets ─────────────────── */
+  .frame {
+    position: relative;
+    border: 1px dashed var(--rule);
+    /* Nested radii: inner = outer − inset */
+    border-radius: 16px;
+  }
+
+  .frame > .frame-inner {
+    border-radius: 12px;
+  }
+
+  /* ── Terminal-ish link: underline grows from the left ───────────── */
+  .link {
+    position: relative;
+    color: var(--fg);
+    text-decoration: none;
+  }
+
+  .link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 200ms var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .link:hover {
+      color: var(--accent-text);
+    }
+
+    .link:hover::after {
+      transform: scaleX(1);
+    }
+  }
+
+  .link:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  /* Always-underlined variant for inline prose links. */
+  .link-inline {
+    color: var(--fg);
+    text-decoration: underline;
+    text-decoration-color: rgb(26 22 19 / 0.35);
+    text-underline-offset: 3px;
+    transition:
+      color 200ms ease,
+      text-decoration-color 200ms ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .link-inline:hover {
+      color: var(--accent-text);
+      text-decoration-color: var(--accent-text);
+    }
+  }
+
+  /* ── Row of a listing: dotted leader between title and date ─────── */
+  .leader {
+    flex: 1;
+    height: 1px;
+    min-width: 1.5rem;
+    background-image: linear-gradient(
+      to right,
+      var(--rule) 0 4px,
+      transparent 4px 8px
+    );
+    background-size: 8px 1px;
+    background-repeat: repeat-x;
+  }
+}
+
+/* ── Entrance: a short, staggered settle. Decorative, never blocking. ── */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 420ms var(--ease-out) both;
+}
+
+/* After the first client-side navigation, keep the fade and drop the travel —
+   the view transition is already moving the page. */
+@keyframes settle {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+html[data-swapped] .rise {
+  animation: settle 260ms var(--ease-out) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Reduced motion means gentler, not none: keep the fade, drop the travel. */
+  .rise {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

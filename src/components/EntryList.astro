@@ -1,0 +1,70 @@
+---
+export interface Entry {
+  href: string;
+  title: string;
+  meta?: string;
+  note?: string;
+  external?: boolean;
+}
+
+interface Props {
+  entries: Entry[];
+  empty?: string;
+}
+
+const { entries, empty = "Nothing here yet." } = Astro.props;
+---
+
+{
+  entries.length === 0 ? (
+    <p class="font-mono text-sm text-ink-600">{empty}</p>
+  ) : (
+    <ul class="flex flex-col">
+      {entries.map((entry, i) => (
+        <li class="rise" style={`animation-delay: ${Math.min(i, 8) * 40}ms`}>
+          <a
+            class="row group -mx-3 flex flex-col gap-1 rounded-lg px-3 py-3"
+            href={entry.href}
+            rel={entry.external ? "noopener noreferrer" : undefined}
+            target={entry.external ? "_blank" : undefined}
+          >
+            <span class="flex items-baseline gap-3">
+              <span class="text-sm text-ink transition-colors duration-200 group-hover:text-accent-600 md:text-[15px]">
+                {entry.title}
+              </span>
+              <span class="leader" aria-hidden="true" />
+              {entry.meta && (
+                <span class="shrink-0 font-mono text-xs tabular-nums text-ink-600">
+                  {entry.meta}
+                </span>
+              )}
+            </span>
+            {entry.note && (
+              <span class="line-clamp-2 max-w-[62ch] text-xs leading-relaxed text-ink-600 md:text-[13px]">
+                {entry.note}
+              </span>
+            )}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  .row {
+    transition:
+      background-color 200ms ease,
+      transform 160ms var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .row:hover {
+      background-color: rgb(243 234 223 / 0.7);
+    }
+  }
+
+  .row:active {
+    transform: scale(0.995);
+  }
+</style>

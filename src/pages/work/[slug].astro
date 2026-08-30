@@ -1,0 +1,121 @@
+---
+import { render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import Frame from "../../components/Frame.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Prose from "../../components/Prose.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getWork, hostOf, longDate, type WorkEntry } from "../../lib/content";
+
+interface Props {
+  entry: WorkEntry;
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const entries = await getWork();
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+};
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const {
+  title,
+  tagline,
+  description,
+  pubDate,
+  role,
+  status,
+  stack,
+  repoUrl,
+  liveUrl,
+} = entry.data;
+
+const meta = [
+  longDate(pubDate),
+  role,
+  status && status !== "live" ? status : null,
+]
+  .filter(Boolean)
+  .join(" · ");
+
+const hasDetails = stack.length > 0 || repoUrl || liveUrl;
+---
+
+<Layout title={`${title} — João Pedro`} description={description ?? tagline}>
+  <main
+    id="main"
+    class="mx-auto flex w-full max-w-[68ch] flex-col gap-10 px-6 py-16 md:py-24"
+  >
+    <a class="link w-fit font-mono text-xs text-ink-600" href="/work">
+      ← work
+    </a>
+
+    <PageHeader title={title} lede={description ?? tagline} meta={meta} />
+
+    {
+      hasDetails ? (
+        <Frame label="details" class="flex flex-col gap-5 px-5 py-8 md:px-8">
+          {stack.length > 0 && (
+            <div class="flex flex-col gap-2">
+              <h2 class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-600">
+                Stack
+              </h2>
+              <ul class="flex flex-wrap gap-2">
+                {stack.map((item) => (
+                  <li class="rounded-md border border-dashed border-ink/15 bg-paper-raised/60 px-2 py-0.5 font-mono text-[11px] text-ink-800">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {(repoUrl || liveUrl) && (
+            <div class="flex flex-col gap-2">
+              <h2 class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-600">
+                Links
+              </h2>
+              <ul class="flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs">
+                {liveUrl && (
+                  <li>
+                    <a
+                      class="link text-ink-800"
+                      href={liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      ↗ {hostOf(liveUrl)}
+                    </a>
+                  </li>
+                )}
+                {repoUrl && (
+                  <li>
+                    <a
+                      class="link text-ink-800"
+                      href={repoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      ↗ source
+                    </a>
+                  </li>
+                )}
+              </ul>
+            </div>
+          )}
+        </Frame>
+      ) : (
+        <hr />
+      )
+    }
+
+    <article class="rise">
+      <Prose>
+        <Content />
+      </Prose>
+    </article>
+  </main>
+</Layout>

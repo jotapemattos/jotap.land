@@ -1,0 +1,57 @@
+---
+import type { GetStaticPaths } from "astro";
+import EntryList from "../../../components/EntryList.astro";
+import PageHeader from "../../../components/PageHeader.astro";
+import Layout from "../../../layouts/Layout.astro";
+import { getBookmarks, hostOf, type BookmarkEntry } from "../../../lib/content";
+
+interface Props {
+  tag: string;
+  bookmarks: BookmarkEntry[];
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const bookmarks = await getBookmarks();
+  const tags = [...new Set(bookmarks.flatMap((b) => b.data.tags))];
+
+  return tags.map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      bookmarks: bookmarks.filter((b) => b.data.tags.includes(tag)),
+    },
+  }));
+};
+
+const { tag, bookmarks } = Astro.props;
+---
+
+<Layout
+  title={`#${tag} — Bookmarks — João Pedro`}
+  description={`Bookmarks tagged ${tag}.`}
+>
+  <main
+    id="main"
+    class="mx-auto flex w-full max-w-[68ch] flex-col gap-10 px-6 py-16 md:py-24"
+  >
+    <a class="link w-fit font-mono text-xs text-ink-600" href="/bookmarks">
+      ← bookmarks
+    </a>
+
+    <PageHeader
+      eyebrow="tag"
+      title={`#${tag}`}
+      meta={`${bookmarks.length} saved`}
+    />
+
+    <EntryList
+      entries={bookmarks.map((bookmark) => ({
+        href: bookmark.data.url,
+        title: bookmark.data.title,
+        meta: hostOf(bookmark.data.url),
+        note: bookmark.data.description ?? undefined,
+        external: true,
+      }))}
+    />
+  </main>
+</Layout>

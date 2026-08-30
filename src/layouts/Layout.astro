@@ -1,34 +1,73 @@
 ---
-import DockExpandable from "../components/dock-expandable";
-import "../styles/globals.css";
 import { ClientRouter } from "astro:transitions";
+import Footer from "../components/Footer.astro";
+import Nav from "../components/Nav.astro";
+import "../styles/globals.css";
 
 interface Props {
   title: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const {
+  title,
+  description = "João Pedro — software engineer based in Brazil. Writing, work and bookmarks.",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
-    <meta name="viewport" content="width=device-width" />
-    <meta
-      name="description"
-      content="My land on the web to share some cool stuff"
-    />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <ClientRouter transition:animate="fade" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Writing — João Pedro"
+      href="/rss.xml"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap"
+    />
+
+    <ClientRouter />
   </head>
-  <body
-    class="flex min-h-screen items-start justify-center bg-stone-900 font-sans"
-  >
+  <body class="min-h-screen bg-paper font-mono text-ink antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-paper-raised focus:px-3 focus:py-2 focus:text-sm"
+    >
+      Skip to content
+    </a>
+    <Nav />
     <slot />
-    <DockExpandable client:load />
+    <Footer />
+
+    <script is:inline>
+      /* First paint gets the staggered rise. A client-side navigation already
+         has the view transition's cross-fade, so replaying a translate on
+         every element on top of it just reads as the page jumping. */
+      document.addEventListener("astro:before-swap", () => {
+        document.documentElement.dataset.swapped = "";
+      });
+    </script>
   </body>
 </html>

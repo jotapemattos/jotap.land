@@ -1,19 +1,21 @@
 ---
-import { Button } from "../components/ui/button";
+import Frame from "../components/Frame.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="404 — Not Found">
+<Layout title="404 — João Pedro" description="This page doesn't exist.">
   <main
-    class="mx-auto flex w-full h-screen max-w-screen-md flex-col items-center justify-center gap-10 p-4 md:p-0"
+    id="main"
+    class="mx-auto flex w-full max-w-[68ch] flex-col gap-8 px-6 py-24 md:py-32"
   >
-    <h1
-      class="text-center font-serif text-3xl font-bold text-contrast-50 md:text-4xl"
-    >
-      404 — I can't find what you were looking for
-    </h1>
-    <div>
-      <Button garnish href="./" title="Take me home" as="a" />
-    </div>
+    <Frame label="404" class="flex flex-col items-center gap-4 px-6 py-14 rise">
+      <p class="font-serif text-4xl text-ink">Nothing here</p>
+      <p class="max-w-[42ch] text-center text-sm text-ink-600">
+        This page doesn't exist — or it did, and I moved it.
+      </p>
+      <a class="link mt-2 font-mono text-xs text-ink-800" href="/"
+        >← back home</a
+      >
+    </Frame>
   </main>
 </Layout>
