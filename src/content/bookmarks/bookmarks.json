@@ -1,4 +1,75 @@
 {
-  "lastUpdate": "2026-08-29T00:00:00.000Z",
-  "data": []
+  "lastUpdate": "2026-09-04T23:08:55.802Z",
+  "data": [
+    {
+      "id": "17c3f40d-8b57-4b53-ba84-118a2e546240",
+      "title": "Memory leak regression testing with V8/Node.js, part 1 - memory usage-based testing",
+      "url": "https://joyeecheung.github.io/blog/2024/03/17/memory-leak-testing-v8-node-js-1/",
+      "savedAt": "2026-04-29T20:37:50.813225+00:00",
+      "description": "Like many other relatively big piece of software, Node.js is no stranger to memory leaks, and with them, fixes and regression tests. Testing against memory leak regressions, however, can be particular",
+      "tags": [
+        "tech-articles"
+      ]
+    },
+    {
+      "id": "dbfbe856-57fe-46d4-b607-3b5f64832224",
+      "title": "How Stripe Detects Fraudulent Transactions Within 100 ms",
+      "url": "https://blog.bytebytego.com/p/how-stripe-detects-fraudulent-transactions?inbox=true&triedRedirect=true",
+      "savedAt": "2026-04-29T14:49:39.900771+00:00",
+      "description": "In this article, we will look at how Stripe’s Radar does this effectively and the architectural decisions the team took while building it.",
+      "tags": [
+        "tech-articles"
+      ]
+    },
+    {
+      "id": "e2c5a64c-a5dc-4d47-a1ba-d0eb1d7ba722",
+      "title": "AWS Distinguished Eng: Learning From 3000 Incidents And How Engineering Is Changing | Marc Brooker",
+      "url": "https://www.youtube.com/watch?v=u3GjIXP9N0s",
+      "savedAt": "2026-04-18T22:02:23.480625+00:00",
+      "description": null,
+      "tags": [
+        "tech-articles"
+      ]
+    },
+    {
+      "id": "c3a3142b-1ce7-4b92-b63e-532b82a151be",
+      "title": "What about juniors?",
+      "url": "https://brooker.co.za/blog/2026/03/25/ic-junior.html",
+      "savedAt": "2026-04-18T22:02:16.633374+00:00",
+      "description": "Start at the beginning.",
+      "tags": [
+        "tech-articles"
+      ]
+    },
+    {
+      "id": "a536dd3f-da5f-4811-ae33-907642bcff22",
+      "title": "CAP THEOREM",
+      "url": "https://miro.com/app/board/uXjVJCL6b64=/?share_link_id=911501521268",
+      "savedAt": "2026-04-16T23:52:38.378162+00:00",
+      "description": null,
+      "tags": [
+        "tech-articles"
+      ]
+    },
+    {
+      "id": "c5b89010-23b2-4e28-8a53-2c17e1068383",
+      "title": "Sobre design de software e complexidade",
+      "url": "https://medium.com/inside-picpay/sobre-design-de-software-e-complexidade-2df2a13f01c2",
+      "savedAt": "2026-03-27T15:51:34.234532+00:00",
+      "description": "Sobre design de software e complexidade No mês de agosto de 2022, tive a oportunidade de apresentar uma palestra no TDC Business, em São Paulo. O título da palestra foi \"Reflexões sobre Design de …",
+      "tags": [
+        "tech-articles"
+      ]
+    },
+    {
+      "id": "223683f0-1642-4cab-a712-778df6a94501",
+      "title": "Testing Guide",
+      "url": "https://martinfowler.com/testing",
+      "savedAt": "2026-02-26T20:13:18.225438+00:00",
+      "description": "Testing should be an integral part of programming, with automated tests providing confidence of correctness.",
+      "tags": [
+        "tech-articles"
+      ]
+    }
+  ]
 }

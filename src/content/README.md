@@ -65,3 +65,16 @@ Every distinct tag gets its own page at `/bookmarks/tags/<tag>`.
 
 The schemas are enforced at build time in `src/content.config.ts` — a typo in
 frontmatter fails the build instead of shipping a broken page.
+
+### Syncing from Shiori
+
+`bookmarks.json` is generated, not hand-written:
+
+```sh
+SHIORI_API_KEY=shk_… pnpm sync:bookmarks
+```
+
+`scripts/sync-bookmarks.mjs` pulls `GET /api/links?tag=tech-articles` from
+Shiori and rewrites the file wholesale. Only that one tag ships — the rest of
+the library is not for the blog. The result is committed, so the build never
+touches the network and a failed sync can't empty the page.
