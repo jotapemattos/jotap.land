@@ -74,7 +74,9 @@ frontmatter fails the build instead of shipping a broken page.
 SHIORI_API_KEY=shk_… pnpm sync:bookmarks
 ```
 
-`scripts/sync-bookmarks.mjs` pulls `GET /api/links?tag=tech-articles` from
-Shiori and rewrites the file wholesale. Only that one tag ships — the rest of
-the library is not for the blog. The result is committed, so the build never
-touches the network and a failed sync can't empty the page.
+`scripts/sync-bookmarks.mjs` pulls `GET /api/links?tag=…` from Shiori once per
+shipping tag — `tech-articles`, `resources` and `talks` — and rewrites the file
+wholesale. A link carried by more than one of them is merged, not duplicated.
+Only those tags ship — the rest of the library is not for the blog. The result
+is committed, so the build never touches the network and a failed sync can't
+empty the page.
