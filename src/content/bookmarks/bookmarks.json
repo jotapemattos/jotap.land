@@ -1,6 +1,56 @@
 {
-  "lastUpdate": "2026-09-06T17:22:37.282Z",
+  "lastUpdate": "2026-09-20T17:31:48.288Z",
   "data": [
+    {
+      "id": "b56e4e50-d937-40c9-b891-d3e7618ab5b0",
+      "title": "Semantic Compression",
+      "url": "https://caseymuratori.com/blog_0015",
+      "savedAt": "2026-09-19T23:03:45.98+00:00",
+      "description": "An introduction to the idea that code should be approached with a mindset towards compressing it semantically, rather than orienting it around objects.",
+      "tags": [
+        "tech-articles"
+      ]
+    },
+    {
+      "id": "bd235280-8422-4cdb-9c58-4a237d303899",
+      "title": "Why AI Coding Made Me More Productive - And Less Happy | Dillon Mulroy",
+      "url": "https://www.youtube.com/watch?v=sYNOgpDKTvE",
+      "savedAt": "2026-09-13T15:28:21.496+00:00",
+      "description": null,
+      "tags": [
+        "talks"
+      ]
+    },
+    {
+      "id": "669d853b-2a8d-4e9c-8854-ebf8ac7beac0",
+      "title": "We replaced Redis with MySQL for inventory reservations—and it scaled (2026)",
+      "url": "https://shopify.engineering/scaling-inventory-reservations",
+      "savedAt": "2026-08-23T19:55:22.54+00:00",
+      "description": "How we used SKIP LOCKED, composite primary keys, and connection visibility to hit our scale targets.",
+      "tags": [
+        "tech-articles"
+      ]
+    },
+    {
+      "id": "4d0f5c9a-5dd3-42d4-a542-e383f6ab283b",
+      "title": "Taming non-determinism: from logic gates to LLMs",
+      "url": "https://leandronsp.com/articles/taming-non-determinism-from-logic-gates-to-llms",
+      "savedAt": "2026-05-14T18:11:09.969566+00:00",
+      "description": "Or: how engineering keeps turning chaos into reliable computation. And why agentic AI still hasn't solved this. There's a pattern that repeats across the",
+      "tags": [
+        "tech-articles"
+      ]
+    },
+    {
+      "id": "9c432bfb-adab-4c35-8574-6c84e107ba7f",
+      "title": "Teste A/B: Frequentista, Bayesiano e Sequential, três paradigmas, três trade-offs, e como…",
+      "url": "https://medium.com/@francocontigo/teste-a-b-frequentista-bayesiano-e-sequential-e-como-netflix-microsoft-e-outras-grandes-decidem-dd2d8b49e96f",
+      "savedAt": "2026-05-08T00:25:44.600036+00:00",
+      "description": "Teste A/B: Frequentista, Bayesiano e Sequential, três paradigmas, três trade-offs, e como Microsoft, Netflix e outras decidem Um panorama de como funciona cada abordagem, onde cada uma trava, e o …",
+      "tags": [
+        "tech-articles"
+      ]
+    },
     {
       "id": "17c3f40d-8b57-4b53-ba84-118a2e546240",
       "title": "Memory leak regression testing with V8/Node.js, part 1 - memory usage-based testing",
@@ -56,7 +106,7 @@
       "title": "Sobre design de software e complexidade",
       "url": "https://medium.com/inside-picpay/sobre-design-de-software-e-complexidade-2df2a13f01c2",
       "savedAt": "2026-03-27T15:51:34.234532+00:00",
-      "description": "Sobre design de software e complexidade No mês de agosto de 2022, tive a oportunidade de apresentar uma palestra no TDC Business, em São Paulo. O título da palestra foi \"Reflexões sobre Design de …",
+      "description": "No mês de agosto de 2022, tive a oportunidade de apresentar uma palestra no TDC Business, em São Paulo. O título da palestra foi \"Reflexões…",
       "tags": [
         "tech-articles"
       ]
