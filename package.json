@@ -9,7 +9,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "sync:bookmarks": "node scripts/sync-bookmarks.mjs",
+    "sync:bookmarks": "node --env-file-if-exists=.env scripts/sync-bookmarks.mjs",
     "lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\""
   },
   "dependencies": {
