@@ -1,6 +1,36 @@
 {
-  "lastUpdate": "2026-09-20T17:31:48.288Z",
+  "lastUpdate": "2026-09-24T01:03:26.156Z",
   "data": [
+    {
+      "id": "3c8157e8-ab89-426d-ba39-13fb9ca485f4",
+      "title": "O MÍNIMO que um dev precisa saber sobre Index no PostgreSQL  | ZamaCodes",
+      "url": "https://www.youtube.com/watch?t=255s&v=o7U8C14btGI",
+      "savedAt": "2026-09-24T00:46:36.395+00:00",
+      "description": null,
+      "tags": [
+        "talks"
+      ]
+    },
+    {
+      "id": "5363adcd-8896-4058-bdc5-51d153db5416",
+      "title": "The Law of Leaky Abstractions",
+      "url": "https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions",
+      "savedAt": "2026-09-21T21:14:57.808+00:00",
+      "description": "There’s a key piece of magic in the engineering of the Internet which you rely on every single day. It happens in the TCP protocol, one of the fundamental building blocks of the Internet. TCP…",
+      "tags": [
+        "tech-articles"
+      ]
+    },
+    {
+      "id": "3f1ada42-b150-41e8-9a18-65de5a77c27e",
+      "title": "the senior engineer death spiral",
+      "url": "https://sunilpai.dev/posts/the-senior-engineer-death-spiral",
+      "savedAt": "2026-09-20T17:14:40.543+00:00",
+      "description": "on proving yourself, burning out, and being a good teammate",
+      "tags": [
+        "tech-articles"
+      ]
+    },
     {
       "id": "b56e4e50-d937-40c9-b891-d3e7618ab5b0",
       "title": "Semantic Compression",
