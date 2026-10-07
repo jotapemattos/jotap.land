@@ -1,6 +1,36 @@
 {
-  "lastUpdate": "2026-09-24T01:03:26.156Z",
+  "lastUpdate": "2026-10-07T00:44:26.979Z",
   "data": [
+    {
+      "id": "daac2eda-78ed-4b49-9ba9-34fd9a327dc4",
+      "title": "Tasteful Components, Made to Stand Out.",
+      "url": "https://www.rareui.com/",
+      "savedAt": "2026-10-07T00:43:49.975+00:00",
+      "description": "Rare UI (RareUI) is a free, open-source registry of rare animated React components. Built with Tailwind CSS, Motion and the shadcn CLI — copy, paste, and own the code.",
+      "tags": [
+        "resources"
+      ]
+    },
+    {
+      "id": "ca544bc1-9b22-4dae-8f52-63ec2c7df4cf",
+      "title": "AWS Lambda Pushes Serverless toward Long-Running Workloads",
+      "url": "https://www.infoq.com/news/2026/09/lambda-90-minute-timeout",
+      "savedAt": "2026-10-07T00:43:09.833+00:00",
+      "description": "AWS Lambda now allows functions running on Lambda Managed Instances to run for up to 90 minutes, six times longer than the previous 15-minute limit, further blurring the line between a Lambda invocati",
+      "tags": [
+        "tech-articles"
+      ]
+    },
+    {
+      "id": "895be6ec-e3e0-4a21-9e4c-7a57dfb2f637",
+      "title": "B-trees and database indexes",
+      "url": "https://planetscale.com/blog/btrees-and-database-indexes",
+      "savedAt": "2026-10-04T14:36:10.003+00:00",
+      "description": "B-trees are used by many modern DBMSs. Learn how they work, how databases use them, and how your choice of primary key can affect index performance.",
+      "tags": [
+        "tech-articles"
+      ]
+    },
     {
       "id": "3c8157e8-ab89-426d-ba39-13fb9ca485f4",
       "title": "O MÍNIMO que um dev precisa saber sobre Index no PostgreSQL  | ZamaCodes",
