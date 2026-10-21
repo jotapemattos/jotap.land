@@ -1,6 +1,46 @@
 {
-  "lastUpdate": "2026-10-07T00:44:26.979Z",
+  "lastUpdate": "2026-10-21T23:20:41.613Z",
   "data": [
+    {
+      "id": "de473505-e854-4ea7-92d5-26cefabbe3e3",
+      "title": "Larger than RAM Vector Indexes for Relational Databases",
+      "url": "https://planetscale.com/blog/larger-than-ram-vector-indexes-for-relational-databases",
+      "savedAt": "2026-10-19T23:11:25.874+00:00",
+      "description": "A new hybrid design for scalable vector indexes and a reference implementation in MySQL",
+      "tags": [
+        "tech-articles"
+      ]
+    },
+    {
+      "id": "508fce5e-2de8-4873-a472-35e1c1e204c5",
+      "title": "Redesigning source control at Anthropic",
+      "url": "https://www.anthropic.com/engineering/redesigning-source-control",
+      "savedAt": "2026-10-15T00:38:22.114+00:00",
+      "description": "As our merges per day grew more than tenfold, source control became our biggest development bottleneck. Here, we share how we migrated to an in-house version control system in five months.",
+      "tags": [
+        "tech-articles"
+      ]
+    },
+    {
+      "id": "73a896bd-0846-4084-b4d7-71410a5555ca",
+      "title": "Module of the Week - PersistedQueue",
+      "url": "https://effect.website/blog/module-of-the-week/persisted-queue",
+      "savedAt": "2026-10-15T00:38:18.321+00:00",
+      "description": "Learn how Effect's PersistedQueue handles background jobs, multiple workers, locking, and retries.",
+      "tags": [
+        "tech-articles"
+      ]
+    },
+    {
+      "id": "cf88630a-3982-42a0-adb0-f38a193eb835",
+      "title": "Kent Beck: Software Engineering in the Age of AI | Prodacity 2026",
+      "url": "https://www.youtube.com/watch?t=1s&v=F8fBgDCf2Y4",
+      "savedAt": "2026-10-15T00:38:11.984+00:00",
+      "description": null,
+      "tags": [
+        "talks"
+      ]
+    },
     {
       "id": "daac2eda-78ed-4b49-9ba9-34fd9a327dc4",
       "title": "Tasteful Components, Made to Stand Out.",
