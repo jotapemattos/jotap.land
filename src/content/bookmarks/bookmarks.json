@@ -1,6 +1,26 @@
 {
-  "lastUpdate": "2026-10-21T23:20:41.613Z",
+  "lastUpdate": "2026-10-27T02:21:32.639Z",
   "data": [
+    {
+      "id": "3ec23846-2b8a-4bec-bdbc-c27a1ecdfeb5",
+      "title": "Doing nothing at work",
+      "url": "https://www.seangoedecke.com/doing-nothing-at-work",
+      "savedAt": "2026-10-27T02:20:59.688+00:00",
+      "description": "Many engineers should be doing less work. I don’t necessarily mean producing less code or fewer changes, but literally working fewer hours in the day. When they…",
+      "tags": [
+        "tech-articles"
+      ]
+    },
+    {
+      "id": "d624c244-d463-4235-a5fb-012598b646c3",
+      "title": "Metastable Failures in Distributed Systems",
+      "url": "https://sigops.org/s/conferences/hotos/2021/papers/hotos21-s11-bronson.pdf",
+      "savedAt": "2026-10-27T02:20:55.049+00:00",
+      "description": null,
+      "tags": [
+        "tech-articles"
+      ]
+    },
     {
       "id": "de473505-e854-4ea7-92d5-26cefabbe3e3",
       "title": "Larger than RAM Vector Indexes for Relational Databases",
