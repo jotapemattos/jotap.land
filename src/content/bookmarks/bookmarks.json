@@ -1,6 +1,26 @@
 {
-  "lastUpdate": "2026-10-27T02:21:32.639Z",
+  "lastUpdate": "2026-11-12T02:54:33.135Z",
   "data": [
+    {
+      "id": "a3070d35-102c-4f86-8c47-b19f4e73b966",
+      "title": "How we eliminated cold starts for 72M monthly page views with edge caching",
+      "url": "https://www.mintlify.com/blog/page-speed-improvements",
+      "savedAt": "2026-11-12T02:53:05.561+00:00",
+      "description": "How we improved page speed performance across Mintlify documentation.",
+      "tags": [
+        "tech-articles"
+      ]
+    },
+    {
+      "id": "95e01a4f-2bc2-422d-916d-063c60394a26",
+      "title": "LFS",
+      "url": "https://people.eecs.berkeley.edu/~brewer/cs262/LFS.pdf",
+      "savedAt": "2026-11-08T21:45:16.45+00:00",
+      "description": null,
+      "tags": [
+        "tech-articles"
+      ]
+    },
     {
       "id": "3ec23846-2b8a-4bec-bdbc-c27a1ecdfeb5",
       "title": "Doing nothing at work",
