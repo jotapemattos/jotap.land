@@ -1,6 +1,16 @@
 {
-  "lastUpdate": "2026-11-12T02:54:33.135Z",
+  "lastUpdate": "2026-11-18T22:00:26.757Z",
   "data": [
+    {
+      "id": "ff969f8e-717e-43af-b41a-01b251a726c7",
+      "title": "Migrating our Email API to Go",
+      "url": "https://resend.com/blog/migrating-our-email-api-to-go",
+      "savedAt": "2026-11-15T20:31:08.15+00:00",
+      "description": "What it took to move our most critical API to Go.",
+      "tags": [
+        "tech-articles"
+      ]
+    },
     {
       "id": "a3070d35-102c-4f86-8c47-b19f4e73b966",
       "title": "How we eliminated cold starts for 72M monthly page views with edge caching",
