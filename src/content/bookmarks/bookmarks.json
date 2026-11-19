@@ -1,6 +1,26 @@
 {
-  "lastUpdate": "2026-11-18T22:00:26.757Z",
+  "lastUpdate": "2026-11-19T21:20:33.918Z",
   "data": [
+    {
+      "id": "2a269a59-cf80-42a9-b382-4e203c8ad888",
+      "title": "The Case for Good Code with Coding Agents",
+      "url": "https://soohoonchoi.com/blog/good-ai-code",
+      "savedAt": "2026-11-19T03:35:49.88+00:00",
+      "description": "Software development is changing. In the past couple of months we've heard stories ranging from Claude Code writing a somewhat functional C compiler to com",
+      "tags": [
+        "tech-articles"
+      ]
+    },
+    {
+      "id": "dc9c8989-7916-49c5-bb91-ba4ad7dc4968",
+      "title": "When 1 + 1",
+      "url": "https://soohoonchoi.com/blog/1-plus-1-geq-2",
+      "savedAt": "2026-11-19T03:35:41.428+00:00",
+      "description": "From my time at Greptile, I witnessed a team that achieved an astonishing amount. By that I mean the mixture of different members produced far more than wh",
+      "tags": [
+        "tech-articles"
+      ]
+    },
     {
       "id": "ff969f8e-717e-43af-b41a-01b251a726c7",
       "title": "Migrating our Email API to Go",
