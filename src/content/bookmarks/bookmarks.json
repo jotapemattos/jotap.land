@@ -1,6 +1,16 @@
 {
-  "lastUpdate": "2026-11-19T21:20:33.918Z",
+  "lastUpdate": "2026-11-26T02:37:25.507Z",
   "data": [
+    {
+      "id": "056df12a-635b-416d-b88f-e2611e71674c",
+      "title": "What Now? Handling Errors in Large Systems",
+      "url": "https://brooker.co.za/blog/2025/11/20/what-now.html",
+      "savedAt": "2026-11-26T02:36:27.801+00:00",
+      "description": "My name is Marc Brooker. I like to build things that work, and do cool stuff. I like building big things. I also dabble in machining, welding, cooking, and skiing.",
+      "tags": [
+        "tech-articles"
+      ]
+    },
     {
       "id": "2a269a59-cf80-42a9-b382-4e203c8ad888",
       "title": "The Case for Good Code with Coding Agents",
