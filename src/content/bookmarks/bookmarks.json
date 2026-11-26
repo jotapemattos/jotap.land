@@ -1,6 +1,16 @@
 {
-  "lastUpdate": "2026-11-26T02:37:25.507Z",
+  "lastUpdate": "2026-11-26T23:37:19.091Z",
   "data": [
+    {
+      "id": "b29e5c7b-e2be-4743-8717-dc889504b50a",
+      "title": "How Database Replication Works",
+      "url": "https://www.joesluis.com/blog/how-database-replication-works",
+      "savedAt": "2026-11-26T21:46:12.648+00:00",
+      "description": "how database replication works and why it is likely more complicated than you may think",
+      "tags": [
+        "tech-articles"
+      ]
+    },
     {
       "id": "056df12a-635b-416d-b88f-e2611e71674c",
       "title": "What Now? Handling Errors in Large Systems",
